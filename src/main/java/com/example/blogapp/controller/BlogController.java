@@ -1,13 +1,17 @@
 package com.example.blogapp.controller;
 
-
+import com.example.blogapp.service.RegisterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BlogController {
 
+    @Autowired
+    RegisterService registerService;
     @RequestMapping("/index")
     public String index(){
         return "index";
@@ -53,5 +57,14 @@ public class BlogController {
     @RequestMapping("/users")
     public String users(){
         return "users";
+    }
+
+    @PostMapping("/register")
+    public String register(@RequestParam String name, @RequestParam String email, @RequestParam String password ) {
+        String result = registerService.add(name,email,password);
+        if(result.equals("positive"))
+            return "index";
+        else
+            return "errorpage";
     }
 }
