@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+</head>
+
+<style>
+    body {
+        font-size: 1.5em;
+    }
+
+    .wrapper {
+        padding: 20px;
+        margin-left: 25px;
+    }
+
+    input[type=text] {
+        width: 50%;
+        border: 0.5px solid red;
+        padding: 15px;
+    }
+
+    textarea {
+        padding: 15px;
+        width: 50%;
+        border: 0.5px solid red;
+    }
+
+    input[type=submit] {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: .8em !important;
+        width: 50%;
+    }
+
+    .heading {
+        font-size: 1.5em !important;
+        background-color: wheat;
+        overflow: auto;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .left {
+        float: left;
+        margin-left: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right {
+        float: right;
+        margin-right: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right:hover {
+        background-color: red;
+        color: white;
+    }
+
+    summary {
+        padding: 10px;
+    }
+
+    .heart {
+        font-size: 1em !important;
+    }
+
+    input[type=button] {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px;
+
+    }
+
+    .button-small {
+        background-color: red;
+        color: white;
+        border: none;
+
+    }
+
+
+    details {
+        width: 50%;
+        box-shadow: 1px 1px 2px red;
+    }
+</style>
+
+<body>
+    <h1 class="heading"><span class="left">Welcome Username</span> <a href="/index"><span class="right">Log
+                Out</span></a><a href="/loginpage"><span class="right">Home</span></a>
+
+    </h1>
+
+    <div class="wrapper">
+
+        <h2>Manage Your Blogs Here!</h2>
+        <hr>
+        <!--blog-->
+        <h2>
+            Spring vs Spring Boot
+        </h2>
+        <hr>
+        <h3>Author Name : Muthukumaran</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, quisquam! Similique, nihil? Obcaecati quam
+            aspernatur voluptatibus necessitatibus! Ratione dolor, id animi necessitatibus quae dignissimos veniam
+            obcaecati
+            dicta consectetur itaque reprehenderit.
+            Eius tempora expedita magni cupiditate odit inventore, ad totam est vitae modi ipsam excepturi quis ab
+            placeat
+            iusto non eligendi neque temporibus corrupti, maxime officiis sint error assumenda. Reiciendis, cumque!
+            Officia, libero id cupiditate nisi quasi odit nemo corporis explicabo repellat illo asperiores dolores
+            accusamus
+            deleniti voluptatem! Repellat, cumque. Eius fuga, officiis aliquam nam adipisci a dolores beatae sint ab?
+            Omnis iure dignissimos quod voluptatibus quibusdam? Amet excepturi deleniti maxime rem nisi quis, nobis
+            tempora
+            modi delectus neque, distinctio iure iste, esse nostrum cum saepe minus ducimus id. Maiores, magnam?
+            Error quidem, ipsam magnam harum nulla minus soluta laudantium delectus quos quis expedita molestias
+            nesciunt
+            voluptatum. Eveniet voluptatibus quos nulla perspiciatis. Sint repellat provident praesentium necessitatibus
+            voluptates amet accusantium dicta.</p>
+        <input class="heart" type="button" value="&hearts; &nbsp;12"><br><br>
+        <details>
+            <summary>View Comments</summary>
+            <li>Comments <input type="button" class="button-small" value="delete"></li><br>
+            <li>Comments <input type="button" class="button-small" value="delete"></li><br>
+            <li>Comments <input type="button" class="button-small" value="delete"></li><br>
+            <li>Comments <input type="button" class="button-small" value="delete"></li><br>
+            <li>Comments <input type="button" class="button-small" value="delete"></li><br>
+        </details> <br>
+        <input type="button" value="Edit Your Blog">
+        <hr>
+        <!--blog-->
+
+    </div>
+</body>
+
+</html>

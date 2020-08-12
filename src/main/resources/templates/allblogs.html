@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+</head>
+
+<style>
+    body {
+        font-size: 1.5em;
+    }
+
+    .heading {
+        font-size: 1.5em !important;
+        background-color: wheat;
+        overflow: auto;
+    }
+
+    h2 {
+        padding-left: 40px;
+        text-align: center;
+    }
+
+    h3 {
+        padding-left: 40px;
+        color: red;
+
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .left {
+        float: left;
+        margin-left: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right {
+        float: right;
+        margin-right: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right:hover {
+        background-color: red;
+        color: white;
+    }
+
+    p {
+        padding: 40px;
+        text-align: justify;
+    }
+
+    input[type=button] {
+        margin-left: 60px;
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: .8em !important;
+    }
+
+    details {
+        margin-left: 65px;
+        width: 50%;
+        box-shadow: 1px 1px 2px red;
+    }
+
+    textarea {
+        margin-left: 65px;
+        width: 50%;
+        border: 0.5px solid red;
+    }
+
+    summary {
+        padding: 10px;
+    }
+
+    .heart {
+        font-size: 1em !important;
+    }
+
+    li {
+        list-style: circle;
+        padding-left: 30px;
+    }
+</style>
+
+<body>
+
+    <h1 class="heading"><span class="left">Blogs Page</span> <a href="/index"><span class="right">Log
+                Out</span></a><a href="/adminmodule"><span class="right">Home</span></a>
+        <a href="/users"><span class="right">Users</span></a>
+    </h1>
+
+    <!--blog-->
+    <h2>
+        Spring vs Spring Boot
+    </h2>
+    <hr>
+    <h3>Author Name : Muthukumaran</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, quisquam! Similique, nihil? Obcaecati quam
+        aspernatur voluptatibus necessitatibus! Ratione dolor, id animi necessitatibus quae dignissimos veniam obcaecati
+        dicta consectetur itaque reprehenderit.
+        Eius tempora expedita magni cupiditate odit inventore, ad totam est vitae modi ipsam excepturi quis ab placeat
+        iusto non eligendi neque temporibus corrupti, maxime officiis sint error assumenda. Reiciendis, cumque!
+        Officia, libero id cupiditate nisi quasi odit nemo corporis explicabo repellat illo asperiores dolores accusamus
+        deleniti voluptatem! Repellat, cumque. Eius fuga, officiis aliquam nam adipisci a dolores beatae sint ab?
+        Omnis iure dignissimos quod voluptatibus quibusdam? Amet excepturi deleniti maxime rem nisi quis, nobis tempora
+        modi delectus neque, distinctio iure iste, esse nostrum cum saepe minus ducimus id. Maiores, magnam?
+        Error quidem, ipsam magnam harum nulla minus soluta laudantium delectus quos quis expedita molestias nesciunt
+        voluptatum. Eveniet voluptatibus quos nulla perspiciatis. Sint repellat provident praesentium necessitatibus
+        voluptates amet accusantium dicta.</p>
+    <input class="heart" type="button" value="&hearts; &nbsp;12"><br><br>
+    <details>
+        <summary>View Comments</summary>
+        <li>Comments</li>
+        <li>Comments</li>
+        <li>Comments</li>
+        <li>Comments</li>
+        <li>Comments</li>
+    </details> <br>
+
+    <textarea name="comment" id="cmmnt" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
+    <input type="button" value="Comment as Admin"> <br> <br>
+    <input type="button" value="Delete this Blog?">
+    <hr>
+    <!--blog-->
+
+
+    <!--blog-->
+    <h2>
+        Spring vs Spring Boot
+    </h2>
+    <hr>
+    <h3>Author Name : Muthukumaran</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, quisquam! Similique, nihil? Obcaecati quam
+        aspernatur voluptatibus necessitatibus! Ratione dolor, id animi necessitatibus quae dignissimos veniam obcaecati
+        dicta consectetur itaque reprehenderit.
+        Eius tempora expedita magni cupiditate odit inventore, ad totam est vitae modi ipsam excepturi quis ab placeat
+        iusto non eligendi neque temporibus corrupti, maxime officiis sint error assumenda. Reiciendis, cumque!
+        Officia, libero id cupiditate nisi quasi odit nemo corporis explicabo repellat illo asperiores dolores accusamus
+        deleniti voluptatem! Repellat, cumque. Eius fuga, officiis aliquam nam adipisci a dolores beatae sint ab?
+        Omnis iure dignissimos quod voluptatibus quibusdam? Amet excepturi deleniti maxime rem nisi quis, nobis tempora
+        modi delectus neque, distinctio iure iste, esse nostrum cum saepe minus ducimus id. Maiores, magnam?
+        Error quidem, ipsam magnam harum nulla minus soluta laudantium delectus quos quis expedita molestias nesciunt
+        voluptatum. Eveniet voluptatibus quos nulla perspiciatis. Sint repellat provident praesentium necessitatibus
+        voluptates amet accusantium dicta.</p>
+    <input class="heart" type="button" value="&hearts; &nbsp;12"><br><br>
+    <details>
+        <summary>View Comments</summary>
+        <li>Comments</li>
+        <li>Comments</li>
+        <li>Comments</li>
+        <li>Comments</li>
+        <li>Comments</li>
+    </details> <br>
+
+    <textarea name="comment" id="commnt" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
+    <input type="button" value="Comment as Admin"> <br> <br>
+    <input type="button" value="Delete this Blog?">
+    <hr>
+    <!--blog-->
+
+    <!--blog-->
+    <h2>
+        Spring vs Spring Boot
+    </h2>
+    <hr>
+    <h3>Author Name : Muthukumaran</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, quisquam! Similique, nihil? Obcaecati quam
+        aspernatur voluptatibus necessitatibus! Ratione dolor, id animi necessitatibus quae dignissimos veniam obcaecati
+        dicta consectetur itaque reprehenderit.
+        Eius tempora expedita magni cupiditate odit inventore, ad totam est vitae modi ipsam excepturi quis ab placeat
+        iusto non eligendi neque temporibus corrupti, maxime officiis sint error assumenda. Reiciendis, cumque!
+        Officia, libero id cupiditate nisi quasi odit nemo corporis explicabo repellat illo asperiores dolores accusamus
+        deleniti voluptatem! Repellat, cumque. Eius fuga, officiis aliquam nam adipisci a dolores beatae sint ab?
+        Omnis iure dignissimos quod voluptatibus quibusdam? Amet excepturi deleniti maxime rem nisi quis, nobis tempora
+        modi delectus neque, distinctio iure iste, esse nostrum cum saepe minus ducimus id. Maiores, magnam?
+        Error quidem, ipsam magnam harum nulla minus soluta laudantium delectus quos quis expedita molestias nesciunt
+        voluptatum. Eveniet voluptatibus quos nulla perspiciatis. Sint repellat provident praesentium necessitatibus
+        voluptates amet accusantium dicta.</p>
+    <input class="heart" type="button" value="&hearts; &nbsp;12"><br><br>
+    <details>
+        <summary>View Comments</summary>
+        <li>Comments</li>
+        <li>Comments</li>
+        <li>Comments</li>
+        <li>Comments</li>
+        <li>Comments</li>
+    </details> <br>
+
+    <textarea name="comment" id="comment" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
+    <input type="button" value="Comment as Admin"> <br> <br>
+    <input type="button" value="Delete this Blog?">
+    <hr>
+    <!--blog-->
+
+
+
+</body>
+
+</html>

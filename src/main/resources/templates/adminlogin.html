@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+</head>
+
+<style>
+    body {
+        font-size: 2em;
+        background-color: whitesmoke;
+    }
+
+    input[type=text],
+    input[type=password] {
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        background-color: burlywood;
+        color: black;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 50%;
+    }
+
+    input[type=submit]:hover {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .container {
+        margin-left: 30%;
+        margin-top: 10%;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <form action="/adminmodule" method="post">
+            <h3>Admin Login</h3>
+            <label for="username">Email</label> <br>
+            <input type="text" placeholder="abc@xyz.com" name="username" id="username" required><br>
+
+            <label for="password">Password</label> <br>
+            <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+            <input type="submit" value="Login">
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

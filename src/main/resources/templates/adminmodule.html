@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+</head>
+
+<style>
+    body {
+        font-size: 1.5em;
+        background-color: whitesmoke;
+    }
+
+    .heading {
+        font-size: 1.5em !important;
+        background-color: wheat;
+        overflow: auto;
+    }
+
+    h3 {
+        font-weight: normal;
+        margin-left: 50px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .left {
+        float: left;
+        margin-left: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right {
+        float: right;
+        margin-right: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right:hover {
+        background-color: red;
+        color: white;
+    }
+</style>
+
+<body>
+    <h1 class="heading"><span class="left">Welcome Admin</span> <a href="/index"><span class="right">Log
+                Out</span></a><a href="/allblogs"><span class="right">View
+                Blogs</span></a>
+        <a href="/users"><span class="right">Users</span></a>
+    </h1>
+
+    <h3>Hello, Admin</h3>
+
+    <h3>You can now view Users List, <br> Manage all Blogs</h3>
+
+    <h3>Use the Buttons on the Navigation bar for controls</h3>
+</body>
+
+</html>
