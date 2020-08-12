@@ -23,6 +23,4 @@ public class RegisterService {
         }
         return "positive";
     }
-
-
 }

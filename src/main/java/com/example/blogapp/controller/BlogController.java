@@ -1,5 +1,6 @@
 package com.example.blogapp.controller;
 
+import com.example.blogapp.service.LoginService;
 import com.example.blogapp.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,10 @@ public class BlogController {
 
     @Autowired
     RegisterService registerService;
+
+    @Autowired
+    LoginService loginService;
+
     @RequestMapping("/index")
     public String index(){
         return "index";
@@ -40,8 +45,11 @@ public class BlogController {
     }
 
     @RequestMapping("/loginpage")
-    public String loginpage(){
-        return "loginpage";
+        public String loginpage(@RequestParam String username, @RequestParam String password){
+            String result = loginService.logincheck(username,password);
+            if(result.equals("positive"))
+                return "loginpage";
+            return "indexerror";
     }
 
     @RequestMapping("/myblogs")

@@ -60,4 +60,6 @@ public class Registration {
         this.email = email;
         this.password = password;
     }
+
+
 }
