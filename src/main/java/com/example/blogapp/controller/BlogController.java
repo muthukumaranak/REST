@@ -4,6 +4,7 @@ import com.example.blogapp.service.LoginService;
 import com.example.blogapp.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,11 +46,19 @@ public class BlogController {
     }
 
     @RequestMapping("/loginpage")
-        public String loginpage(@RequestParam String username, @RequestParam String password){
+        public String loginpage(Model model, @RequestParam String username, @RequestParam String password){
             String result = loginService.logincheck(username,password);
             if(result.equals("positive"))
                 return "loginpage";
             return "indexerror";
+    }
+
+    @RequestMapping("/adminmodulecheck")
+    public String adminmodulecheck(@RequestParam String username, @RequestParam String password){
+        String result = loginService.logincheck(username,password);
+        if(result.equals("positive"))
+            return "adminmodule";
+        return "adminloginerror";
     }
 
     @RequestMapping("/myblogs")

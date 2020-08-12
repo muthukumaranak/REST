@@ -20,6 +20,7 @@
         margin: 8px 0;
         display: inline-block;
         box-sizing: border-box;
+        border: 2px solid red;
     }
 
     input[type=submit] {
@@ -41,24 +42,29 @@
         margin-left: 30%;
         margin-top: 10%;
     }
+    span{
+    font-size: 15px;
+    color: red;
+    }
+
 </style>
 
 <body>
 
-    <div class="container">
-        <form action="/adminmodulecheck" method="post">
-            <h3>Admin Login</h3>
-            <label for="username">Email</label> <br>
-            <input type="text" placeholder="abc@xyz.com" name="username" id="username" required><br>
+<div class="container">
+    <form action="/adminmodulecheck" method="post">
+        <h3>Admin Login</h3>
+        <label for="username">Email</label> <br>
+        <input type="text" placeholder="abc@xyz.com" name="username" id="username" required><span>&nbsp;Invalid Name</span><br>
 
-            <label for="password">Password</label> <br>
-            <input type="password" placeholder="Enter Password" name="password" id="password" required>
+        <label for="password">Password</label> <br>
+        <input type="password" placeholder="Enter Password" name="password" id="password" required><span>&nbsp;Invalid Password</span>
 
-            <input type="submit" value="Login">
+        <input type="submit" value="Login">
 
-        </form>
+    </form>
 
-    </div>
+</div>
 
 </body>
 
