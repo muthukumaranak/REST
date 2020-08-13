@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "blogs")
-public class addBlog {
+public class BlogPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -39,16 +39,16 @@ public class addBlog {
         return email;
     }
 
-    public addBlog(String email, String title,String blogcontent) {
+    public BlogPost(String email, String title, String blogcontent) {
         this.email = email;
         this.title = title;
         this.blogcontent = blogcontent;
     }
 
-    public addBlog() {
+    public BlogPost() {
     }
 
-    public addBlog(int id, String email, String title, String blogcontent) {
+    public BlogPost(int id, String email, String title, String blogcontent) {
         this.id = id;
         this.email = email;
         this.title = title;

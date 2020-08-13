@@ -1,31 +1,30 @@
 package com.example.blogapp.service;
 
-import com.example.blogapp.entity.Registration;
-import com.example.blogapp.entity.addBlog;
-import com.example.blogapp.repository.AddBlogRepo;
+import com.example.blogapp.entity.BlogPost;
+import com.example.blogapp.repository.BlogPostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class addBlogService {
+public class AddBlogService {
 
     @Autowired
-    AddBlogRepo addBlogRepo;
+    BlogPostRepo blogPostRepo;
 
     public void addBlog(String email, String title, String blogcontent){
         try {
-            addBlog ab = new addBlog(email, title,blogcontent);
-            addBlogRepo.save(ab);
+            BlogPost ab = new BlogPost(email, title,blogcontent);
+            blogPostRepo.save(ab);
         }
         catch (Exception e){
             System.out.println(e);
         }
     }
 
-    public List<addBlog> getall() {
-        List<addBlog> list = (List<addBlog>)addBlogRepo.findAll();
+    public List<BlogPost> getall() {
+        List<BlogPost> list = (List<BlogPost>) blogPostRepo.findAll();
         return list;
     }
 }

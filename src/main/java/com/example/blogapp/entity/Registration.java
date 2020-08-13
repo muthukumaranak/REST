@@ -61,5 +61,23 @@ public class Registration {
         this.password = password;
     }
 
+    public Registration(int id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
+    public Registration() {
+    }
+
+    @Override
+    public String toString() {
+        return "Registration{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

@@ -1,9 +1,10 @@
 package com.example.blogapp.controller;
 
-import com.example.blogapp.entity.addBlog;
+import com.example.blogapp.entity.Registration;
+import com.example.blogapp.entity.BlogPost;
 import com.example.blogapp.service.LoginService;
 import com.example.blogapp.service.RegisterService;
-import com.example.blogapp.service.addBlogService;
+import com.example.blogapp.service.AddBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +24,9 @@ public class BlogController {
     LoginService loginService;
 
     @Autowired
-    addBlogService addBlogService;
+    AddBlogService addBlogService;
 
+    public String name;
     @RequestMapping("/index")
     public String index(){
         return "index";
@@ -55,21 +57,36 @@ public class BlogController {
     @RequestMapping("/loginpage")
         public String loginpage(Model model, @RequestParam String username, @RequestParam String password){
             String result = loginService.logincheck(username,password);
-            String name = loginService.getName(username);
+            name = loginService.getName(username);
             if(result.equals("positive")){
                 model.addAttribute("name",name);
-                List<addBlog> list = (List<addBlog>)addBlogService.getall();
+                List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
                 model.addAttribute("list", list);
                 return "loginpage";
             }
             return "indexerror";
     }
 
+    @RequestMapping("/login")
+    public String login(Model model){
+        model.addAttribute("name",name);
+        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        model.addAttribute("list", list);
+        return "loginpage";
+    }
+
     @RequestMapping("/displayallblogs")
     public String displayallblogs(Model model){
-            List<addBlog> list = (List<addBlog>)addBlogService.getall();
+            List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
             model.addAttribute("list", list);
             return "allblogs";
+    }
+
+    @RequestMapping("/allusers")
+    public String allusers(Model model){
+            List<Registration> list = (List<Registration>)registerService.getall();
+            model.addAttribute("list",list);
+        return "users";
     }
 
     @RequestMapping("/adminmodulecheck")
@@ -90,10 +107,7 @@ public class BlogController {
         return "registrationpage";
     }
 
-    @RequestMapping("/users")
-    public String users(){
-        return "users";
-    }
+
 
     @PostMapping("/register")
     public String register(@RequestParam String name, @RequestParam String email, @RequestParam String password ) {
