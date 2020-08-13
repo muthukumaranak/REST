@@ -1,5 +1,6 @@
 package com.example.blogapp.controller;
 
+import com.example.blogapp.entity.addBlog;
 import com.example.blogapp.service.LoginService;
 import com.example.blogapp.service.RegisterService;
 import com.example.blogapp.service.addBlogService;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class BlogController {
@@ -55,7 +58,10 @@ public class BlogController {
             String name = loginService.getName(username);
             if(result.equals("positive")){
                 model.addAttribute("name",name);
-                return "loginpage";}
+                List<addBlog> list = (List<addBlog>)addBlogService.getall();
+                model.addAttribute("list", list);
+                return "loginpage";
+            }
             return "indexerror";
     }
 

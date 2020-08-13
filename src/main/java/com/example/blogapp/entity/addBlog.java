@@ -45,6 +45,16 @@ public class addBlog {
         this.blogcontent = blogcontent;
     }
 
+    public addBlog() {
+    }
+
+    public addBlog(int id, String email, String title, String blogcontent) {
+        this.id = id;
+        this.email = email;
+        this.title = title;
+        this.blogcontent = blogcontent;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -55,5 +65,15 @@ public class addBlog {
 
     public void setBlogcontent(String blogcontent) {
         this.blogcontent = blogcontent;
+    }
+
+    @Override
+    public String toString() {
+        return "addBlog{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", title='" + title + '\'' +
+                ", blogcontent='" + blogcontent + '\'' +
+                '}';
     }
 }

@@ -6,6 +6,8 @@ import com.example.blogapp.repository.AddBlogRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class addBlogService {
 
@@ -20,5 +22,10 @@ public class addBlogService {
         catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    public List<addBlog> getall() {
+        List<addBlog> list = (List<addBlog>)addBlogRepo.findAll();
+        return list;
     }
 }
