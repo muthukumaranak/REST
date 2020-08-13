@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BlogController {
@@ -86,7 +88,7 @@ public class BlogController {
 
     @RequestMapping("/allusers")
     public String allusers(Model model){
-            List<Registration> list = (List<Registration>)registerService.getall();
+            List<Object[]> list = registerService.getall();
             model.addAttribute("list",list);
         return "users";
     }

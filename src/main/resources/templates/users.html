@@ -85,9 +85,9 @@
             <th>Number of Blogs</th>
 
             <tr th:each = "temp:${list}">
-                <td th:text="${temp.name}">
+                <td th:text="${temp[0]}">
                 </td>
-                <td>count</td>
+                <td th:text="${temp[1]}"></td>
             </tr>
 
 
