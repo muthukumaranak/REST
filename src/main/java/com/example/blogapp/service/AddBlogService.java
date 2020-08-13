@@ -13,9 +13,9 @@ public class AddBlogService {
     @Autowired
     BlogPostRepo blogPostRepo;
 
-    public void addBlog(String email, String title, String blogcontent){
+    public void addBlog(String name, String email, String title, String blogcontent){
         try {
-            BlogPost ab = new BlogPost(email, title,blogcontent);
+            BlogPost ab = new BlogPost(name, email, title, blogcontent);
             blogPostRepo.save(ab);
         }
         catch (Exception e){

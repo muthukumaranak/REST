@@ -26,7 +26,8 @@ public class BlogController {
     @Autowired
     AddBlogService addBlogService;
 
-    public String name;
+    public String sessionName;
+    public String sessionEmail;
     @RequestMapping("/index")
     public String index(){
         return "index";
@@ -56,10 +57,11 @@ public class BlogController {
 
     @RequestMapping("/loginpage")
         public String loginpage(Model model, @RequestParam String username, @RequestParam String password){
+            sessionEmail = username;
             String result = loginService.logincheck(username,password);
-            name = loginService.getName(username);
+            sessionName = loginService.getName(username);
             if(result.equals("positive")){
-                model.addAttribute("name",name);
+                model.addAttribute("name",sessionName);
                 List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
                 model.addAttribute("list", list);
                 return "loginpage";
@@ -69,7 +71,7 @@ public class BlogController {
 
     @RequestMapping("/login")
     public String login(Model model){
-        model.addAttribute("name",name);
+        model.addAttribute("name",sessionName);
         List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
         model.addAttribute("list", list);
         return "loginpage";
@@ -119,8 +121,11 @@ public class BlogController {
     }
 
     @PostMapping("/addingblog")
-    public String addingblog(@RequestParam String email, @RequestParam String title, @RequestParam String blogcontent){
-        addBlogService.addBlog(email,title,blogcontent);
+    public String addingblog(Model model,@RequestParam String title, @RequestParam String blogcontent){
+        addBlogService.addBlog(sessionName, sessionEmail, title, blogcontent);
+        model.addAttribute("name",sessionName);
+        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        model.addAttribute("list", list);
         return "loginpage";
     }
 }
