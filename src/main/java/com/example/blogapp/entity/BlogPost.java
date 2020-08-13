@@ -22,6 +22,9 @@ public class BlogPost {
     @Column(name = "blogcontent")
     public String blogcontent;
 
+    @Column(name = "likes")
+    public int likes;
+
     public int getId() {
         return id;
     }
