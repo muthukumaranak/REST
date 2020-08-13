@@ -48,8 +48,10 @@ public class BlogController {
     @RequestMapping("/loginpage")
         public String loginpage(Model model, @RequestParam String username, @RequestParam String password){
             String result = loginService.logincheck(username,password);
-            if(result.equals("positive"))
-                return "loginpage";
+            String name = loginService.getName(username);
+            if(result.equals("positive")){
+                model.addAttribute("name",name);
+                return "loginpage";}
             return "indexerror";
     }
 

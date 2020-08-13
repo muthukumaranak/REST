@@ -21,4 +21,9 @@ public class LoginService {
             return "positive";
         return "negative";
     }
+
+    public String getName(String username) {
+        String name = registerRepo.getName(username);
+        return name;
+    }
 }

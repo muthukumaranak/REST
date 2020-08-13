@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -94,12 +94,12 @@
 </style>
 
 <body>
-    <h1 class="heading left" th:text="Welcome Muthu"> <a href="/index"><span class="right">Log
+    <h1 class="heading"><span class="left" th:text="'Welcome ' +${name}"></span><a href="/index"><span class="right">Log
                 Out</span></a><a href="/myblogs"><span class="right">Edit
                 Blog</span></a>
         <a href="/addblog"><span class="right">New Blog</span></a>
     </h1>
-
+    <br>
     <!--blog-->
     <h2>
         Spring vs Spring Boot
