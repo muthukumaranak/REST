@@ -70,25 +70,30 @@
 </style>
 
 <body>
-    <h1 class="heading"><span class="left">Welcome Username</span> <a href="/index"><span class="right">Log
+    <h1 class="heading"><span class="left">Add Blog Page!</span> <a href="/index"><span class="right">Log
                 Out</span></a><a href="/loginpage"><span class="right">Home</span></a>
 
     </h1>
 
     <div class="wrapper">
-        <form action="/loginpage" method="post">
+        <form action="/addingblog" method="post">
             <h2>Create Your Blog Here!</h2>
+            <hr>
+            <label for="email">
+                <h3>E-Mail</h3>
+            </label>
+            <input type="text" name="email" id="email" placeholder="Please Enter your email">
             <hr>
             <label for="heading">
                 <h3>Title</h3>
             </label>
-            <input type="text" name="" id="heading" placeholder="Please Enter your heading for blog">
+            <input type="text" name="title" id="heading" placeholder="Please Enter your heading for blog">
             <hr>
 
             <label>
                 <h3>Content</h3>
             </label>
-            <textarea name="blog" id="" cols="150" rows="50" placeholder="Enter your blog"></textarea> <br><br>
+            <textarea name="blogcontent" id="" cols="150" rows="50" placeholder="Enter your blog"></textarea> <br><br>
 
             <input type="submit" value="Post your Blog?">
         </form>

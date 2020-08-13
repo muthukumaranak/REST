@@ -2,6 +2,7 @@ package com.example.blogapp.controller;
 
 import com.example.blogapp.service.LoginService;
 import com.example.blogapp.service.RegisterService;
+import com.example.blogapp.service.addBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,9 @@ public class BlogController {
 
     @Autowired
     LoginService loginService;
+
+    @Autowired
+    addBlogService addBlogService;
 
     @RequestMapping("/index")
     public String index(){
@@ -85,5 +89,11 @@ public class BlogController {
             return "index";
         else
             return "errorpage";
+    }
+
+    @PostMapping("/addingblog")
+    public String addingblog(@RequestParam String email, @RequestParam String title, @RequestParam String blogcontent){
+        addBlogService.addBlog(email,title,blogcontent);
+        return "loginpage";
     }
 }
