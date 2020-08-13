@@ -65,6 +65,13 @@ public class BlogController {
             return "indexerror";
     }
 
+    @RequestMapping("/displayallblogs")
+    public String displayallblogs(Model model){
+            List<addBlog> list = (List<addBlog>)addBlogService.getall();
+            model.addAttribute("list", list);
+            return "allblogs";
+    }
+
     @RequestMapping("/adminmodulecheck")
     public String adminmodulecheck(@RequestParam String username, @RequestParam String password){
         String result = loginService.logincheck(username,password);
