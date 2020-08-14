@@ -58,7 +58,7 @@
         text-align: justify;
     }
 
-    input[type=button] {
+    input[type=submit] {
         margin-left: 60px;
         background-color: red;
         color: white;
@@ -88,40 +88,44 @@
     }
 
     li {
-        list-style: circle;
+    	margin-top: 0;
+        list-style: none;
         padding-left: 30px;
+        font-weight: bold;
+    }
+    .comment{
+    padding-left: 50px;
+    font-weight: normal;
     }
 </style>
 
 <body>
-    <h1 class="heading"><span class="left" th:text="'Welcome ' +${name}"></span><a href="/index"><span class="right">Log
+<h1 class="heading"><span class="left" th:text="'Welcome ' +${name}"></span><a href="/index"><span class="right">Log
                 Out</span></a><a href="/myblogs"><span class="right">Edit
                 Blog</span></a>
-        <a href="/addblog"><span class="right">New Blog</span></a>
-    </h1>
-    <br>
+    <a href="/addblog"><span class="right">New Blog</span></a>
+</h1>
+<br>
 
-    <div th:each="temp:${list}">
+<div th:each="temp:${list}">
     <h2 th:text="${temp.title}">
     </h2>
     <hr>
     <h3 th:text="'Author Name: '+${temp.authorname}"></h3>
     <p th:text="${temp.blogcontent}"></p>
-    <input class="heart" type="button" value="&hearts; &nbsp;12"><br><br>
+    <input class="heart" type="submit" value="&hearts; &nbsp;12"><br><br>
     <details>
         <summary>View Comments</summary>
-        <li>Comments</li>
-        <li>Comments</li>
-        <li>Comments</li>
-        <li>Comments</li>
-        <li>Comments</li>
+        <hr>
+        <li>Name<br><span class="comment">Comments</span></li>
+        <hr>
     </details> <br>
-
-    <textarea name="comment" id="commet" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
-    <input type="button" value="Add your comment">
+    <form action="/addingComment" method="post">
+        <input type="hidden" th:value="${temp.id}" name="blogid"/>
+    <textarea name="comment" id="comment" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
+    <input type="submit" value="Add your comment">
     <hr>
-
-    </div>
-
+    </form>
+</div>
 </body>
 </html>

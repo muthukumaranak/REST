@@ -1,7 +1,9 @@
 package com.example.blogapp.controller;
 
+import com.example.blogapp.entity.Comment;
 import com.example.blogapp.entity.Registration;
 import com.example.blogapp.entity.BlogPost;
+import com.example.blogapp.service.CommentService;
 import com.example.blogapp.service.LoginService;
 import com.example.blogapp.service.RegisterService;
 import com.example.blogapp.service.AddBlogService;
@@ -24,6 +26,9 @@ public class BlogController {
 
     @Autowired
     LoginService loginService;
+
+    @Autowired
+    CommentService commentService;
 
     @Autowired
     AddBlogService addBlogService;
@@ -125,6 +130,17 @@ public class BlogController {
     @PostMapping("/addingblog")
     public String addingblog(Model model,@RequestParam String title, @RequestParam String blogcontent){
         addBlogService.addBlog(sessionName, sessionEmail, title, blogcontent);
+        model.addAttribute("name",sessionName);
+        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        model.addAttribute("list", list);
+        return "loginpage";
+    }
+
+
+    @PostMapping("/addingComment")
+    public String addingComment(Model model, @RequestParam String blogid, @RequestParam String comment){
+        int bid = Integer.parseInt(blogid);
+        commentService.addComment(bid, comment, sessionName);
         model.addAttribute("name",sessionName);
         List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
         model.addAttribute("list", list);

@@ -1,6 +1,5 @@
 package com.example.blogapp.entity;
 
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 
 import javax.persistence.*;
 
