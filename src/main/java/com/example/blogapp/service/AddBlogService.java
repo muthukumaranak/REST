@@ -27,4 +27,8 @@ public class AddBlogService {
         List<BlogPost> list = (List<BlogPost>) blogPostRepo.findAll();
         return list;
     }
+
+    public void addLike(int bid, int likes) {
+        blogPostRepo.postLike(likes, bid);
+    }
 }

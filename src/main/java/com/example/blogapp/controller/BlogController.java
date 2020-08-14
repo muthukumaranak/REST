@@ -158,4 +158,19 @@ public class BlogController {
         model.addAttribute("commentList",commentList);
         return "loginpage";
     }
+
+    @PostMapping("/like")
+    public String like(Model model, @RequestParam String id, @RequestParam String likes){
+        int bid = Integer.parseInt(id);
+        int like = Integer.parseInt(likes) + 1;
+        addBlogService.addLike(bid, like);
+        model.addAttribute("name",sessionName);
+        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
+        return "loginpage";
+    }
+
+
 }
