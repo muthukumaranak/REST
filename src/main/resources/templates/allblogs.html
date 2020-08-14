@@ -101,28 +101,31 @@
     </h1>
 
     <!--blog-->
+
     <div th:each="temp:${list}">
         <h2 th:text="${temp.title}">
         </h2>
         <hr>
         <h3 th:text="'Author Name: '+${temp.authorname}"></h3>
         <p th:text="${temp.blogcontent}"></p>
-        <input class="heart" type="button" value="&hearts; &nbsp;12"><br><br>
+        <form action="/like" method="post">
+            <input type="hidden" th:value="${temp.id}" name="id"/>
+            <input type="hidden" th:value="${temp.likes}" name="likes"/>
+            <input class="heart" type="submit" th:value="'&hearts; &nbsp;'+${temp.likes}" ><br><br>
+        </form>
         <details>
             <summary>View Comments</summary>
-            <li>Comments</li>
-            <li>Comments</li>
-            <li>Comments</li>
-            <li>Comments</li>
-            <li>Comments</li>
+            <div  th:each="temp2:${commentList}">
+                <li th:if="${temp.id} == ${temp2.blogid}" th:text="${temp2.commentby} + ' : ' + ${temp2.comment}"><hr></li>
+            </div>
         </details> <br>
-
-        <textarea name="comment" id="commet" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
-        <input type="button" value="Add your comment">
-        <hr>
-
+        <form action="/addingComment" method="post">
+            <input type="hidden" th:value="${temp.id}" name="blogid"/>
+            <textarea name="comment" id="comment" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
+            <input type="submit" value="Add your comment">
+            <hr>
+        </form>
     </div>
-
 
 </body>
 
