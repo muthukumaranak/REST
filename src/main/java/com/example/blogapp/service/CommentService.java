@@ -24,4 +24,9 @@ public class CommentService {
             System.out.println(e);
         }
     }
+
+    public List<Comment> getAll() {
+        List<Comment> list = (List<Comment>)commentRepo.findAll();
+        return list;
+    }
 }

@@ -89,14 +89,9 @@
 
     li {
     	margin-top: 0;
-        list-style: none;
         padding-left: 30px;
-        font-weight: bold;
     }
-    .comment{
-    padding-left: 50px;
-    font-weight: normal;
-    }
+
 </style>
 
 <body>
@@ -116,9 +111,10 @@
     <input class="heart" type="submit" value="&hearts; &nbsp;12"><br><br>
     <details>
         <summary>View Comments</summary>
+        <div  th:each="temp2:${commentList}">
+        <li th:text="${temp2.commentby} + ' : ' + ${temp2.comment}"></li>
         <hr>
-        <li>Name<br><span class="comment">Comments</span></li>
-        <hr>
+        </div>
     </details> <br>
     <form action="/addingComment" method="post">
         <input type="hidden" th:value="${temp.id}" name="blogid"/>

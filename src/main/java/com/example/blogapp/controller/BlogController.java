@@ -71,6 +71,10 @@ public class BlogController {
                 model.addAttribute("name",sessionName);
                 List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
                 model.addAttribute("list", list);
+
+                List<Comment> commentList = commentService.getAll();
+                model.addAttribute("commentList",commentList);
+
                 return "loginpage";
             }
             return "indexerror";
@@ -81,6 +85,8 @@ public class BlogController {
         model.addAttribute("name",sessionName);
         List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
         model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
         return "loginpage";
     }
 
@@ -88,6 +94,8 @@ public class BlogController {
     public String displayallblogs(Model model){
             List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
             model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
             return "allblogs";
     }
 
@@ -133,6 +141,8 @@ public class BlogController {
         model.addAttribute("name",sessionName);
         List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
         model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
         return "loginpage";
     }
 
@@ -144,6 +154,8 @@ public class BlogController {
         model.addAttribute("name",sessionName);
         List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
         model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
         return "loginpage";
     }
 }

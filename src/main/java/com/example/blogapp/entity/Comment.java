@@ -57,6 +57,16 @@ public class Comment {
         this.commentby = commentby;
     }
 
+    public Comment(int id, int blogid, String comment, String commentby) {
+        this.id = id;
+        this.blogid = blogid;
+        this.comment = comment;
+        this.commentby = commentby;
+    }
+
+    public Comment() {
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
