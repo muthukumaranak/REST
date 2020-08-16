@@ -23,10 +23,9 @@
         text-align: center;
     }
 
-    h3 {
+    h3,h5 {
         padding-left: 40px;
         color: red;
-
     }
 
     a {
@@ -54,7 +53,8 @@
     }
 
     p {
-        padding: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
         text-align: justify;
     }
 
@@ -107,6 +107,7 @@
     </h2>
     <hr>
     <h3 th:text="'Author Name: '+${temp.authorname}"></h3>
+    <h5 th:text="'Published: '+${temp.time}"></h5>
     <p th:text="${temp.blogcontent}"></p>
     <form action="/like" method="post">
         <input type="hidden" th:value="${temp.id}" name="id"/>

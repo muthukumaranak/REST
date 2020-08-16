@@ -40,12 +40,19 @@ public class BlogController {
         return "index";
     }
 
-
     @RequestMapping("/addblog")
     public String addblog(){
         return "addblog";
     }
 
+    @RequestMapping("/guest")
+    public String guest(Model model){
+        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
+        return "Guest";
+    }
 
     @RequestMapping("/adminlogin")
     public String adminlogin(){

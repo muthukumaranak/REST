@@ -25,6 +25,25 @@ public class BlogPost {
     @Column(name = "likes")
     public int likes;
 
+    @Column(name = "time")
+    public String time;
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public int getId() {
         return id;
     }
@@ -65,19 +84,23 @@ public class BlogPost {
         this.blogcontent = blogcontent;
     }
 
-    public BlogPost(int id, String authorname, String email, String title, String blogcontent) {
+    public BlogPost(int id, String authorname, String email, String title, String blogcontent, int likes, String time) {
         this.id = id;
         this.authorname = authorname;
         this.email = email;
         this.title = title;
         this.blogcontent = blogcontent;
+        this.likes = likes;
+        this.time = time;
     }
 
-    public BlogPost(String authorname, String email, String title, String blogcontent) {
+    public BlogPost(String authorname, String email, String title, String blogcontent, int likes, String time) {
         this.authorname = authorname;
         this.email = email;
         this.title = title;
         this.blogcontent = blogcontent;
+        this.likes = likes;
+        this.time = time;
     }
 
     public BlogPost() {

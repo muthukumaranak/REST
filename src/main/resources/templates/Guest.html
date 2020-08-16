@@ -58,7 +58,7 @@
         text-align: justify;
     }
 
-    input[type=submit] {
+    input[type=button] {
         margin-left: 60px;
         background-color: red;
         color: white;
@@ -95,39 +95,31 @@
 
 <body>
 
-    <h1 class="heading"><span class="left">Blogs Page</span> <a href="/index"><span class="right">Log
-                Out</span></a><a href="/adminmodule"><span class="right">Home</span></a>
-        <a href="/allusers"><span class="right">Users</span></a>
-    </h1>
+<h1 class="heading"><span class="left">Welcome Guest</span> <a href="/index"><span class="right">Log
+                In</span></a>
+    <a href="/registrationpage"><span class="right">Sign Up</span></a>
+</h1>
 
-    <!--blog-->
+<!--blog-->
 
-    <div th:each="temp:${list}">
-        <h2 th:text="${temp.title}">
-        </h2>
-        <hr>
-        <h3 th:text="'Author Name: '+${temp.authorname}"></h3>
+<div th:each="temp:${list}">
+    <h2 th:text="${temp.title}">
+    </h2>
+    <hr>
+    <h3 th:text="'Author Name: '+${temp.authorname}"></h3>
 
-        <h5 th:text="'Published: '+${temp.time}"></h5>
-        <p th:text="${temp.blogcontent}"></p>
-        <form action="/like" method="post">
-            <input type="hidden" th:value="${temp.id}" name="id"/>
-            <input type="hidden" th:value="${temp.likes}" name="likes"/>
-            <input class="heart" type="submit" th:value="'&hearts; &nbsp;'+${temp.likes}" ><br><br>
-        </form>
-        <details>
-            <summary>View Comments</summary>
-            <div  th:each="temp2:${commentList}">
-                <li th:if="${temp.id} == ${temp2.blogid}" th:text="${temp2.commentby} + ' : ' + ${temp2.comment}"><hr></li>
-            </div>
-        </details> <br>
-        <form action="/addingComment" method="post">
-            <input type="hidden" th:value="${temp.id}" name="blogid"/>
-            <textarea name="comment" id="comment" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
-            <input type="submit" value="Add your comment">
-            <hr>
-        </form>
-    </div>
+    <h5 th:text="'Published: '+${temp.time}"></h5>
+    <p th:text="${temp.blogcontent}"></p>
+        <input class="heart" type="button" th:value="'&hearts; &nbsp;'+${temp.likes}" ><br><br>
+
+    <details>
+        <summary>View Comments</summary>
+        <div  th:each="temp2:${commentList}">
+            <li th:if="${temp.id} == ${temp2.blogid}" th:text="${temp2.commentby} + ' : ' + ${temp2.comment}"><hr></li>
+        </div>
+    </details> <br> <hr>
+
+</div>
 
 </body>
 

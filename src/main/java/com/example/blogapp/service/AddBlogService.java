@@ -5,6 +5,8 @@ import com.example.blogapp.repository.BlogPostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,7 +17,9 @@ public class AddBlogService {
 
     public void addBlog(String name, String email, String title, String blogcontent){
         try {
-            BlogPost ab = new BlogPost(name, email, title, blogcontent);
+            SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            String time = f.format(new Date());
+            BlogPost ab = new BlogPost(name, email, title, blogcontent, 0, time);
             blogPostRepo.save(ab);
         }
         catch (Exception e){
