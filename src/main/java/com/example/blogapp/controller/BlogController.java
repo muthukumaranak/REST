@@ -195,5 +195,16 @@ public class BlogController {
         return "loginpage";
     }
 
-
+    @RequestMapping("/search")
+    public String searching(){
+        return "search";
+    }
+    @RequestMapping("/searching")
+    public String search(Model model, @RequestParam String search){
+        List<BlogPost> list = addBlogService.search(search);
+        model.addAttribute("list",list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
+        return "searchresult";
+    }
 }

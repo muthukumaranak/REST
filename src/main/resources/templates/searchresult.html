@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+</head>
+<style>
+    body {
+        font-size: 1.5em;
+    }
+
+    .wrapper {
+        padding: 20px;
+        margin-left: 25px;
+    }
+
+    input[type=text] {
+        width: 50%;
+        border: 0.5px solid red;
+        padding: 15px;
+    }
+
+    textarea {
+        padding: 15px;
+        width: 50%;
+        border: 0.5px solid red;
+    }
+
+    input[type=submit] {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: .8em !important;
+        width: 50%;
+    }
+
+    .heading {
+        font-size: 1.5em !important;
+        background-color: wheat;
+        overflow: auto;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .left {
+        float: left;
+        margin-left: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right {
+        float: right;
+        margin-right: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right:hover {
+        background-color: red;
+        color: white;
+    }
+
+    summary {
+        padding: 10px;
+    }
+
+    .heart {
+        font-size: 1em !important;
+    }
+
+    input[type=submit] {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px;
+
+    }
+
+    .button-small {
+        background-color: red;
+        color: white;
+        border: none;
+
+    }
+
+
+    details {
+        width: 50%;
+        box-shadow: 1px 1px 2px red;
+    }
+</style>
+
+
+<body>
+
+
+<h1 class="heading"><span class="left">Welcome Guest</span> <a href="/index"><span class="right">Log
+                In</span></a></h1>
+
+<div class="wrapper">
+    <form action="/search" method="post">
+        <input type="text" name="search" placeholder="Enter Keyword for search"></input> <br><br>
+        <input type="submit" value="Search"></input>
+    </form>
+
+
+<hr>
+<div th:each="temp:${list}">
+    <h2 th:text="${temp.title}">
+    </h2>
+    <hr>
+    <h3 th:text="'Author Name: '+${temp.authorname}"></h3>
+    <h5 th:text="'Published: '+${temp.time}"></h5>
+    <p th:text="${temp.blogcontent}"></p>
+    <details>
+        <summary>View Comments</summary>
+        <div th:each="temp2:${commentList}">
+            <li th:if="${temp.id} == ${temp2.blogid}" th:text="${temp2.commentby} + ' : ' + ${temp2.comment}">
+                <hr>
+            </li>
+        </div>
+    </details> <br>
+    <hr>
+</div>
+</div>
+
+</body>
+
+</html>

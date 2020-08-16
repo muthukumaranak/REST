@@ -39,4 +39,9 @@ public class AddBlogService {
     public void addLike(int bid, int likes) {
         blogPostRepo.postLike(likes, bid);
     }
+
+    public List<BlogPost> search(String searchvalue) {
+        List<BlogPost> list = (List<BlogPost>)blogPostRepo.search(searchvalue);
+        return list;
+    }
 }
