@@ -1,7 +1,6 @@
 package com.example.blogapp.controller;
 
 import com.example.blogapp.entity.Comment;
-import com.example.blogapp.entity.Registration;
 import com.example.blogapp.entity.BlogPost;
 import com.example.blogapp.service.CommentService;
 import com.example.blogapp.service.LoginService;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class BlogController {
@@ -35,6 +32,7 @@ public class BlogController {
 
     public String sessionName;
     public String sessionEmail;
+
     @RequestMapping("/index")
     public String index(){
         return "index";
@@ -99,6 +97,7 @@ public class BlogController {
 
     @RequestMapping("/displayallblogs")
     public String displayallblogs(Model model){
+        model.addAttribute("name",sessionName);
             List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
             model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
@@ -115,6 +114,7 @@ public class BlogController {
 
     @RequestMapping("/adminmodulecheck")
     public String adminmodulecheck(@RequestParam String username, @RequestParam String password){
+        sessionName = "Admin";
         String result = loginService.logincheck(username,password);
         if(result.equals("positive"))
             return "adminmodule";
@@ -122,7 +122,12 @@ public class BlogController {
     }
 
     @RequestMapping("/myblogs")
-    public String myblogs(){
+    public String myblogs(Model model){
+        model.addAttribute("name",sessionName);
+        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
         return "myblogs";
     }
 
@@ -171,6 +176,17 @@ public class BlogController {
         int bid = Integer.parseInt(id);
         int like = Integer.parseInt(likes) + 1;
         addBlogService.addLike(bid, like);
+        model.addAttribute("name",sessionName);
+        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
+        return "loginpage";
+    }
+
+    @RequestMapping("/updateblog")
+    public String updateblog(Model model, @RequestParam int blogid, @RequestParam String blogcontent){
+        addBlogService.updateblog(blogid,blogcontent);
         model.addAttribute("name",sessionName);
         List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
         model.addAttribute("list", list);

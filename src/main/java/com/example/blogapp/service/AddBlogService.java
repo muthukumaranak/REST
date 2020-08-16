@@ -32,6 +32,10 @@ public class AddBlogService {
         return list;
     }
 
+    public void updateblog(int blogid, String blogcontent){
+        blogPostRepo.updateblogs(blogcontent,blogid);
+    }
+
     public void addLike(int bid, int likes) {
         blogPostRepo.postLike(likes, bid);
     }

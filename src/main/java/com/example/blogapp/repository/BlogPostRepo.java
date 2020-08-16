@@ -19,4 +19,8 @@ public interface BlogPostRepo extends JpaRepository<BlogPost, Integer> {
     @Query(value = "update blogapp.blogs set likes = ?1 where id = ?2",nativeQuery = true)
     void postLike(int likes, int bid);
 
+    @Transactional
+    @Modifying
+    @Query(value = "update blogapp.blogs set blogcontent=?1 where id=?2",nativeQuery = true)
+    void updateblogs(String blogcontent,int blogid);
 }

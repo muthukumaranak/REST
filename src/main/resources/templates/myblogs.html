@@ -99,7 +99,7 @@
 </style>
 
 <body>
-    <h1 class="heading"><span class="left">Welcome Username</span> <a href="/index"><span class="right">Log
+    <h1 class="heading"><span class="left" th:text="'Welcome ' + ${name}"></span> <a href="/index"><span class="right">Log
                 Out</span></a><a href="/loginpage"><span class="right">Home</span></a>
 
     </h1>
@@ -111,28 +111,17 @@
         <!--blog-->
 
         <div th:each="temp:${list}">
+
+            <div th:if="${name} == ${temp.authorname}">
             <h2 th:text="${temp.title}">
             </h2>
+                <h5 th:text="'Published by you on: '+${temp.time}"></h5>
             <hr>
-            <h3 th:text="'Author Name: '+${temp.authorname}"></h3>
-            <h5 th:text="'Published: '+${temp.time}"></h5>
-            <p th:text="${temp.blogcontent}"></p>
-            <form action="/like" method="post">
-                <input type="hidden" th:value="${temp.id}" name="id"/>
-                <input type="hidden" th:value="${temp.likes}" name="likes"/>
-                <input class="heart" type="submit" th:value="'&hearts; &nbsp;'+${temp.likes}" ><br><br>
-            </form>
-            <details>
-                <summary>View Comments</summary>
-                <div  th:each="temp2:${commentList}">
-                    <li th:if="${temp.id} == ${temp2.blogid}" th:text="${temp2.commentby} + ' : ' + ${temp2.comment}"><hr></li>
-                </div>
-            </details> <br>
-            <form action="/addingComment" method="post">
-                <input type="hidden" th:value="${temp.id}" name="blogid"/>
-                <textarea name="comment" id="comment" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
-                <input type="submit" value="Add your comment">
-                <hr>
+                <form action="/updateblog" method="post">
+                    <input type="hidden" th:value="${temp.id}" name="blogid"/>
+            <textarea cols="150" rows="100" type="text" name="blogcontent" th:text="${temp.blogcontent}"></textarea>
+                <input type="submit" value="Update your Blog">
+            </div>
             </form>
         </div>
         <!--blog-->
