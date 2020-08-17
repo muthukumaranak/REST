@@ -218,4 +218,15 @@ public class BlogController {
         model.addAttribute("commentList",commentList);
         return "myblogs";
     }
+
+    @RequestMapping("/removeBlogAsAdmin")
+    public String removeBlogAsAdmin(Model model, @RequestParam int blogid){
+        addBlogService.removeBlog(blogid);
+        model.addAttribute("name",sessionName);
+        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
+        return "allblogs";
+    }
 }

@@ -121,7 +121,7 @@
                     <input type="hidden" th:value="${temp.id}" name="blogid"/>
             <textarea cols="150" rows="100" type="text" name="blogcontent" th:text="${temp.blogcontent}"></textarea>
                     <input type="submit" value="Update your Blog"/>
-                </form> <br><br>
+                </form>
                 <form action="/removeBlog" method="post">
                     <input type="hidden" th:value="${temp.id}" name="blogid"/>
                     <input type="submit" value="Delete This Blog!"/>
