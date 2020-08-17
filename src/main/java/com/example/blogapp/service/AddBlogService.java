@@ -31,6 +31,10 @@ public class AddBlogService {
         List<BlogPost> list = (List<BlogPost>) blogPostRepo.findAll();
         return list;
     }
+    
+    public void removeBlog(int id){
+        blogPostRepo.deleteById(id);
+    }
 
     public void updateblog(int blogid, String blogcontent){
         blogPostRepo.updateblogs(blogcontent,blogid);

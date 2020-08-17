@@ -207,4 +207,15 @@ public class BlogController {
         model.addAttribute("commentList",commentList);
         return "searchresult";
     }
+
+    @RequestMapping("/removeBlog")
+    public String removeBlog(Model model, @RequestParam int blogid){
+        addBlogService.removeBlog(blogid);
+        model.addAttribute("name",sessionName);
+        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
+        return "myblogs";
+    }
 }
