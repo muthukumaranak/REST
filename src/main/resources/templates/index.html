@@ -13,6 +13,16 @@
         background-color: whitesmoke;
     }
 
+    h4{
+    font-size: 20px;
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    }
+
+    h4>a{
+    text-decoration: none;}
+
     input[type=text],
     input[type=password] {
         width: 50%;
@@ -49,12 +59,11 @@
 
     .container {
         margin-left: 30%;
-        margin-top: 8%;
+        margin-top: 3%;
     }
 </style>
 
 <body>
-
     <div class="container">
         <form action="/loginpage" method="post">
             <h3>Login Page</h3>
@@ -64,8 +73,12 @@
             <label for="password">Password</label> <br>
             <input type="password" placeholder="Enter Password" name="password" id="password" required>
             <input type="submit" value="Login" class="loginbtn">
-
         </form>
+
+        <form action="/guest" method="post">
+            <input type="submit" value="Guest">
+        </form>
+
         <form action="/registrationpage" method="post">
             <input type="submit" value="New User">
         </form>
