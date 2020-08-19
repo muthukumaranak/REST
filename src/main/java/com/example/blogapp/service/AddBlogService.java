@@ -48,4 +48,9 @@ public class AddBlogService {
         List<BlogPost> list = (List<BlogPost>)blogPostRepo.search(searchvalue);
         return list;
     }
+
+    public List<BlogPost> searchByTag(String excerpt) {
+        List<BlogPost> list = (List<BlogPost>)blogPostRepo.searchByTag(excerpt);
+        return list;
+    }
 }

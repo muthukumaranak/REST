@@ -200,9 +200,19 @@ public class BlogController {
     public String searching(){
         return "search";
     }
+
     @RequestMapping("/searching")
     public String search(Model model, @RequestParam String search){
         List<BlogPost> list = addBlogService.search(search);
+        model.addAttribute("list",list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
+        return "searchresult";
+    }
+
+    @RequestMapping("/searchingByTag")
+    public String searchByTag(Model model, @RequestParam String excerpt){
+        List<BlogPost> list = addBlogService.searchByTag(excerpt);
         model.addAttribute("list",list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);

@@ -16,8 +16,8 @@
         margin-left: 25px;
     }
 
-    input[type=text] {
-        width: 50%;
+    input[type=text], select {
+        width: 25%;
         border: 0.5px solid red;
         padding: 15px;
     }
@@ -34,7 +34,7 @@
         border: none;
         padding: 10px;
         font-size: .8em !important;
-        width: 50%;
+        width: 25%;
     }
 
     .heading {
@@ -76,9 +76,11 @@
     }
 
     input[type=submit] {
+        display: inline-block;
         background-color: red;
         color: white;
         border: none;
+        margin-left: 20px;
         padding: 10px;
 
     }
@@ -105,8 +107,20 @@
                 In</span></a></h1>
 
 <div class="wrapper">
-    <form action="/search" method="post">
-        <input type="text" name="search" placeholder="Enter Keyword for search"></input> <br><br>
+    <form action="/searching" method="post">
+        <input type="text" name="search" placeholder="Enter Keyword for search"></input>
+        <input type="submit" value="Search"></input>
+    </form>
+
+    <form action="/searchingByTag" method="post">
+        <label for="excerpt"><h3>Choose a Tag</h3></label>
+        <select name="excerpt" id="excerpt">
+            <option value="Technology">Technology</option>
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Education">Education</option>
+            <option value="others">others</option>
+        </select>
         <input type="submit" value="Search"></input>
     </form>
 
