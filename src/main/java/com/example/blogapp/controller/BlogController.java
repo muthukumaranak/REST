@@ -149,8 +149,8 @@ public class BlogController {
     }
 
     @PostMapping("/addingblog")
-    public String addingblog(Model model,@RequestParam String title, @RequestParam String blogcontent){
-        addBlogService.addBlog(sessionName, sessionEmail, title, blogcontent);
+    public String addingblog(Model model,@RequestParam String title, @RequestParam String excerpt, @RequestParam String blogcontent){
+        addBlogService.addBlog(sessionName, sessionEmail, title, blogcontent, excerpt);
         model.addAttribute("name",sessionName);
         List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
         model.addAttribute("list", list);

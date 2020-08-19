@@ -17,7 +17,7 @@
         margin-left: 25px;
     }
 
-    input[type=text] {
+    input[type=text], select {
         width: 50%;
         border: 0.5px solid red;
         padding: 15px;
@@ -70,29 +70,38 @@
 </style>
 
 <body>
-    <h1 class="heading"><span class="left">Add Blog Page!</span> <a href="/index"><span class="right">Log
+<h1 class="heading"><span class="left">Add Blog Page!</span> <a href="/index"><span class="right">Log
                 Out</span></a><a href="/login"><span class="right">Home</span></a>
 
-    </h1>
+</h1>
 
-    <div class="wrapper">
-        <form action="/addingblog" method="post">
-            <h2>Create Your Blog Here!</h2>
+<div class="wrapper">
+    <form action="/addingblog" method="post">
+        <h2>Create Your Blog Here!</h2>
+        <hr>
+        <label for="heading">
+            <h3>Title</h3>
+        </label>
+        <input type="text" name="title" id="heading" placeholder="Please Enter your heading for blog">
+        <hr>
+
+        <label for="excerpt"><h3>Choose a Tag</h3></label>
+        <select name="excerpt" id="excerpt">
+            <option value="Technology">Technology</option>
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Education">Education</option>
+            <option value="others">others</option>
+        </select>
+        <label>
             <hr>
-            <label for="heading">
-                <h3>Title</h3>
-            </label>
-            <input type="text" name="title" id="heading" placeholder="Please Enter your heading for blog">
-            <hr>
+            <h3>Content</h3>
+        </label>
+        <textarea name="blogcontent" id="" cols="150" rows="50" placeholder="Enter your blog"></textarea> <br><br>
 
-            <label>
-                <h3>Content</h3>
-            </label>
-            <textarea name="blogcontent" id="" cols="150" rows="50" placeholder="Enter your blog"></textarea> <br><br>
-
-            <input type="submit" value="Post your Blog?">
-        </form>
-    </div>
+        <input type="submit" value="Post your Blog?">
+    </form>
+</div>
 </body>
 
 </html>

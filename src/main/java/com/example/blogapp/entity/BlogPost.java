@@ -28,6 +28,17 @@ public class BlogPost {
     @Column(name = "time")
     public String time;
 
+    @Column(name = "excerpt")
+    public String excerpt;
+
+    public String getExcerpt() {
+        return excerpt;
+    }
+
+    public void setExcerpt(String excerpt) {
+        this.excerpt = excerpt;
+    }
+
     public int getLikes() {
         return likes;
     }
@@ -84,7 +95,7 @@ public class BlogPost {
         this.blogcontent = blogcontent;
     }
 
-    public BlogPost(int id, String authorname, String email, String title, String blogcontent, int likes, String time) {
+    public BlogPost(int id, String authorname, String email, String title, String blogcontent, int likes, String time, String excerpt) {
         this.id = id;
         this.authorname = authorname;
         this.email = email;
@@ -92,15 +103,17 @@ public class BlogPost {
         this.blogcontent = blogcontent;
         this.likes = likes;
         this.time = time;
+        this.excerpt = excerpt;
     }
 
-    public BlogPost(String authorname, String email, String title, String blogcontent, int likes, String time) {
+    public BlogPost(String authorname, String email, String title, String blogcontent, int likes, String time, String excerpt) {
         this.authorname = authorname;
         this.email = email;
         this.title = title;
         this.blogcontent = blogcontent;
         this.likes = likes;
         this.time = time;
+        this.excerpt = excerpt;
     }
 
     public BlogPost() {
@@ -114,6 +127,9 @@ public class BlogPost {
                 ", email='" + email + '\'' +
                 ", title='" + title + '\'' +
                 ", blogcontent='" + blogcontent + '\'' +
+                ", likes=" + likes +
+                ", time='" + time + '\'' +
+                ", excerpt='" + excerpt + '\'' +
                 '}';
     }
 }

@@ -15,11 +15,11 @@ public class AddBlogService {
     @Autowired
     BlogPostRepo blogPostRepo;
 
-    public void addBlog(String name, String email, String title, String blogcontent){
+    public void addBlog(String name, String email, String title, String blogcontent, String excerpt){
         try {
             SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String time = f.format(new Date());
-            BlogPost ab = new BlogPost(name, email, title, blogcontent, 0, time);
+            BlogPost ab = new BlogPost(name, email, title, blogcontent, 0, time, excerpt);
             blogPostRepo.save(ab);
         }
         catch (Exception e){
