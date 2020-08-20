@@ -3,8 +3,9 @@ package com.example.blogapp.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "blogs")
+@Table(name = "posts")
 public class BlogPost {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

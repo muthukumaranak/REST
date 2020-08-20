@@ -21,6 +21,9 @@ public class Registration {
     @Column(name = "password")
     public String password;
 
+    @Column(name = "role")
+    public String role = "user";
+
     public int getId() {
         return id;
     }
@@ -53,11 +56,12 @@ public class Registration {
         this.password = password;
     }
 
-    public Registration(String name, String email, String password) {
+    public String getRole() {
+        return role;
+    }
 
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Registration(int id, String name, String email, String password) {
@@ -65,18 +69,16 @@ public class Registration {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.role = "user";
+    }
+
+    public Registration(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = "user";
     }
 
     public Registration() {
-    }
-
-    @Override
-    public String toString() {
-        return "Registration{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

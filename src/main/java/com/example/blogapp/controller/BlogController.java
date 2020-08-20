@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -136,8 +135,6 @@ public class BlogController {
     public String registrationpage(){
         return "registrationpage";
     }
-
-
 
     @PostMapping("/register")
     public String register(@RequestParam String name, @RequestParam String email, @RequestParam String password ) {

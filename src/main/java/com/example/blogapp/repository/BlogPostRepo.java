@@ -11,26 +11,26 @@ import java.util.List;
 
 public interface BlogPostRepo extends JpaRepository<BlogPost, Integer> {
 
-    @Query(value = "select authorname, count(authorname) as count FROM blogapp.blogs group by authorname order by authorname asc",nativeQuery = true)
+    @Query(value = "select authorname, count(authorname) as count FROM posts group by authorname order by authorname asc",nativeQuery = true)
     List<Object[]> getCount();
 
     @Transactional
     @Modifying
-    @Query(value = "update blogapp.blogs set likes = ?1 where id = ?2",nativeQuery = true)
+    @Query(value = "update posts set likes = ?1 where id = ?2",nativeQuery = true)
     void postLike(int likes, int bid);
 
     @Transactional
     @Modifying
-    @Query(value = "update blogapp.blogs set blogcontent=?1 where id=?2",nativeQuery = true)
+    @Query(value = "update posts set blogcontent=?1 where id=?2",nativeQuery = true)
     void updateblogs(String blogcontent,int blogid);
 
     @Transactional
     @Modifying
-    @Query(value = "select * from blogapp.blogs where title like %?1%",nativeQuery = true)
+    @Query(value = "select * from posts where title like %?1%",nativeQuery = true)
     List<BlogPost> search(String search);
 
     @Transactional
     @Modifying
-    @Query(value = "select * from blogapp.blogs where excerpt=?1",nativeQuery = true)
+    @Query(value = "select * from posts where excerpt=?1",nativeQuery = true)
     List<BlogPost> searchByTag(String search);
 }

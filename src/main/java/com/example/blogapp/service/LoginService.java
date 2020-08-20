@@ -12,7 +12,8 @@ public class LoginService {
 
     public String logincheck(String name, String password){
         String originalPassword = registrationRepo.validateemail(name);
-        if(password.equals(originalPassword))
+        String role = registrationRepo.getRole(name);
+        if(password.equals(originalPassword) && role.equals("admin"))
             return "positive";
         return "negative";
     }
