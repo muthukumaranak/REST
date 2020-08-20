@@ -15,7 +15,7 @@ public class Registration {
     @Column(name = "name")
     public String name;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     public String email;
 
     @Column(name = "password")

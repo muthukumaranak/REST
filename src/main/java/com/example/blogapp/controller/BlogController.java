@@ -76,7 +76,6 @@ public class BlogController {
                 model.addAttribute("name",sessionName);
                 List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
                 model.addAttribute("list", list);
-
                 List<Comment> commentList = commentService.getAll();
                 model.addAttribute("commentList",commentList);
 
@@ -115,7 +114,7 @@ public class BlogController {
     @RequestMapping("/adminmodulecheck")
     public String adminmodulecheck(@RequestParam String username, @RequestParam String password){
         sessionName = "Admin";
-        String result = loginService.logincheck(username,password);
+        String result = loginService.adminlogincheck(username,password);
         if(result.equals("positive"))
             return "adminmodule";
         return "adminloginerror";
