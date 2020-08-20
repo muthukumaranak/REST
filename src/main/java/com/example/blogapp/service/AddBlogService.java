@@ -15,16 +15,19 @@ public class AddBlogService {
     @Autowired
     BlogPostRepo blogPostRepo;
 
-    public void addBlog(String name, String email, String title, String blogcontent, String excerpt){
+    public int addBlog(String name, String email, String title, String blogcontent, String excerpt){
+        int id = 0;
         try {
             SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String time = f.format(new Date());
-            BlogPost ab = new BlogPost(name, email, title, blogcontent, 0, time, excerpt);
-            blogPostRepo.save(ab);
+            BlogPost blogPost = new BlogPost(name, email, title, blogcontent, 0, time, excerpt);
+            blogPostRepo.save(blogPost);
+            id = blogPost.getId();
         }
         catch (Exception e){
             System.out.println(e);
         }
+        return id;
     }
 
     public List<BlogPost> getall() {
@@ -53,4 +56,5 @@ public class AddBlogService {
         List<BlogPost> list = (List<BlogPost>)blogPostRepo.searchByTag(excerpt);
         return list;
     }
+
 }

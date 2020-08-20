@@ -1,18 +1,19 @@
 package com.example.blogapp.entity;
 
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tags")
-public class Tags {
+@Table(name = "post_tags")
+public class PostTags {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public int id;
 
-    @Column(name = "name")
-    public String name;
+    @Column(name = "tag_id")
+    public int tag_id;
 
     @Column(name = "created_at")
     public String created_at;
@@ -28,12 +29,12 @@ public class Tags {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getTag_id() {
+        return tag_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTag_id(int tag_id) {
+        this.tag_id = tag_id;
     }
 
     public String getCreated_at() {
@@ -52,27 +53,27 @@ public class Tags {
         this.updated_at = updated_at;
     }
 
-    public Tags(String name, String created_at, String updated_at) {
-        this.name = name;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-    }
-
-    public Tags(int id, String name, String created_at, String updated_at) {
+    public PostTags(int id, int tag_id, String created_at, String updated_at) {
         this.id = id;
-        this.name = name;
+        this.tag_id = tag_id;
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
 
-    public Tags() {
+    public PostTags(int tag_id, String created_at, String updated_at) {
+        this.tag_id = tag_id;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+
+    public PostTags() {
     }
 
     @Override
     public String toString() {
-        return "Tags{" +
+        return "PostTags{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", tag_id=" + tag_id +
                 ", created_at='" + created_at + '\'' +
                 ", updated_at='" + updated_at + '\'' +
                 '}';
