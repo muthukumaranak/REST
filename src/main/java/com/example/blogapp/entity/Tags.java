@@ -1,9 +1,10 @@
 package com.example.blogapp.entity;
 
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tags")
+@Table(name= "tags")
 public class Tags {
 
     @Id
@@ -52,14 +53,14 @@ public class Tags {
         this.updated_at = updated_at;
     }
 
-    public Tags(String name, String created_at, String updated_at) {
+    public Tags(int id, String name, String created_at, String updated_at) {
+        this.id = id;
         this.name = name;
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
 
-    public Tags(int id, String name, String created_at, String updated_at) {
-        this.id = id;
+    public Tags(String name, String created_at, String updated_at) {
         this.name = name;
         this.created_at = created_at;
         this.updated_at = updated_at;

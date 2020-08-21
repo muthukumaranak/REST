@@ -53,14 +53,14 @@ public class PostTags {
         this.updated_at = updated_at;
     }
 
-    public PostTags(int id, int tag_id, String created_at, String updated_at) {
-        this.id = id;
+    public PostTags(int tag_id, String created_at, String updated_at) {
         this.tag_id = tag_id;
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
 
-    public PostTags(int tag_id, String created_at, String updated_at) {
+    public PostTags(int id, int tag_id, String created_at, String updated_at) {
+        this.id = id;
         this.tag_id = tag_id;
         this.created_at = created_at;
         this.updated_at = updated_at;

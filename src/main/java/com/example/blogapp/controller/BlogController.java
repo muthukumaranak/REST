@@ -2,7 +2,6 @@ package com.example.blogapp.controller;
 
 import com.example.blogapp.entity.Comment;
 import com.example.blogapp.entity.BlogPost;
-import com.example.blogapp.entity.Tags;
 import com.example.blogapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -22,10 +19,8 @@ public class BlogController {
     RegisterService registerService;
 
     @Autowired
-    TagService tagService;
+    TagsService tagsService;
 
-    @Autowired
-    PostTagsService postTagsService;
 
     @Autowired
     LoginService loginService;
@@ -158,6 +153,7 @@ public class BlogController {
         model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
+        tagsService.addTags(excerpt);
         return "loginpage";
     }
 
