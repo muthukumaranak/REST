@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class Registration {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,7 +64,7 @@ public class Registration {
         this.role = role;
     }
 
-    public Registration(int id, String name, String email, String password) {
+    public Users(int id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -72,13 +72,13 @@ public class Registration {
         this.role = "user";
     }
 
-    public Registration(String name, String email, String password) {
+    public Users(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = "user";
     }
 
-    public Registration() {
+    public Users() {
     }
 }

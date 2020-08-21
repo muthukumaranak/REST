@@ -1,7 +1,7 @@
 package com.example.blogapp.service;
 
 
-import com.example.blogapp.entity.Registration;
+import com.example.blogapp.entity.Users;
 import com.example.blogapp.repository.BlogPostRepo;
 import com.example.blogapp.repository.RegistrationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class RegisterService {
 
     public String add(String name,  String email,  String password){
         try {
-        Registration registration = new Registration(name,email,password);
-        registrationRepo.save(registration);}
+        Users users = new Users(name,email,password);
+        registrationRepo.save(users);}
         catch (Exception e){
             System.out.println(e);
             return "negative";

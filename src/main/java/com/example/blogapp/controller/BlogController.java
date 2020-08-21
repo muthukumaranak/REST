@@ -157,7 +157,6 @@ public class BlogController {
         return "loginpage";
     }
 
-
     @PostMapping("/addingComment")
     public String addingComment(Model model, @RequestParam String blogid, @RequestParam String comment){
         int bid = Integer.parseInt(blogid);
