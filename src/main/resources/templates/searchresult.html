@@ -16,10 +16,11 @@
         margin-left: 25px;
     }
 
-    input[type=text], select {
+    input[type=text] , input[type=date] {
         width: 25%;
         border: 0.5px solid red;
         padding: 15px;
+        margin-bottom: 20px;
     }
 
     textarea {
@@ -75,7 +76,7 @@
         font-size: 1em !important;
     }
 
-    input[type=submit] {
+    input[type=submit]{
         display: inline-block;
         background-color: red;
         color: white;
@@ -108,24 +109,17 @@
 
 <div class="wrapper">
     <form action="/searching" method="post">
-        <input type="text" name="search" placeholder="Enter Keyword for search"></input>
+        <input type="text" name="search" placeholder="Enter Keyword for search" required></input>
         <input type="submit" value="Search"></input>
     </form>
 
-    <form action="/searchingByTag" method="post">
-        <label for="excerpt"><h3>Choose a Tag</h3></label>
-        <select name="excerpt" id="excerpt">
-            <option value="Technology">Technology</option>
-            <option value="Food">Food</option>
-            <option value="Travel">Travel</option>
-            <option value="Education">Education</option>
-            <option value="others">others</option>
-        </select>
+    <form action="/searching" method="post">
+        <input type="date" name="search" required></input>
         <input type="submit" value="Search"></input>
     </form>
-
-
 <hr>
+    <h2 th:text="${yesEmpty}">
+    </h2>
 <div th:each="temp:${list}">
     <h2 th:text="${temp.title}">
     </h2>

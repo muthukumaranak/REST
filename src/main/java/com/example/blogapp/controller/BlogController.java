@@ -2,13 +2,12 @@ package com.example.blogapp.controller;
 
 import com.example.blogapp.entity.Comment;
 import com.example.blogapp.entity.BlogPost;
+import com.example.blogapp.repository.UsersRepo;
 import com.example.blogapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,11 +15,13 @@ import java.util.List;
 public class BlogController {
 
     @Autowired
-    RegisterService registerService;
+    UserService userService;
 
     @Autowired
     TagsService tagsService;
 
+    @Autowired
+    UsersRepo usersRepo;
 
     @Autowired
     LoginService loginService;
@@ -29,7 +30,7 @@ public class BlogController {
     CommentService commentService;
 
     @Autowired
-    AddBlogService addBlogService;
+    BlogService blogService;
 
     public String sessionName;
     public String sessionEmail;
@@ -46,7 +47,7 @@ public class BlogController {
 
     @RequestMapping("/guest")
     public String guest(Model model){
-        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
         model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
@@ -75,11 +76,10 @@ public class BlogController {
             sessionName = loginService.getName(username);
             if(result.equals("positive")){
                 model.addAttribute("name",sessionName);
-                List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+                List<BlogPost> list = (List<BlogPost>) blogService.getall();
                 model.addAttribute("list", list);
                 List<Comment> commentList = commentService.getAll();
                 model.addAttribute("commentList",commentList);
-
                 return "loginpage";
             }
             return "indexerror";
@@ -88,7 +88,7 @@ public class BlogController {
     @RequestMapping("/login")
     public String login(Model model){
         model.addAttribute("name",sessionName);
-        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
         model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
@@ -98,7 +98,7 @@ public class BlogController {
     @RequestMapping("/displayallblogs")
     public String displayallblogs(Model model){
         model.addAttribute("name",sessionName);
-            List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+            List<BlogPost> list = (List<BlogPost>) blogService.getall();
             model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
@@ -107,7 +107,7 @@ public class BlogController {
 
     @RequestMapping("/allusers")
     public String allusers(Model model){
-            List<Object[]> list = registerService.getall();
+            List<Object[]> list = userService.getall();
             model.addAttribute("list",list);
         return "users";
     }
@@ -124,7 +124,7 @@ public class BlogController {
     @RequestMapping("/myblogs")
     public String myblogs(Model model){
         model.addAttribute("name",sessionName);
-        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
         model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
@@ -138,7 +138,7 @@ public class BlogController {
 
     @PostMapping("/register")
     public String register(@RequestParam String name, @RequestParam String email, @RequestParam String password ) {
-        String result = registerService.add(name,email,password);
+        String result = userService.add(name,email,password);
         if(result.equals("positive"))
             return "index";
         else
@@ -147,9 +147,9 @@ public class BlogController {
 
     @PostMapping("/addingblog")
     public String addingblog(Model model,@RequestParam String title, @RequestParam String excerpt, @RequestParam String blogcontent){
-        int blogId = addBlogService.addBlog(sessionName, sessionEmail, title, blogcontent, excerpt);
+        int blogId = blogService.addBlog(sessionName, sessionEmail, title, blogcontent, excerpt);
         model.addAttribute("name",sessionName);
-        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
         model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
@@ -162,7 +162,7 @@ public class BlogController {
         int bid = Integer.parseInt(blogid);
         commentService.addComment(bid, comment, sessionName);
         model.addAttribute("name",sessionName);
-        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
         model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
@@ -173,9 +173,9 @@ public class BlogController {
     public String like(Model model, @RequestParam String id, @RequestParam String likes){
         int bid = Integer.parseInt(id);
         int like = Integer.parseInt(likes) + 1;
-        addBlogService.addLike(bid, like);
+        blogService.addLike(bid, like);
         model.addAttribute("name",sessionName);
-        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
         model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
@@ -184,32 +184,27 @@ public class BlogController {
 
     @RequestMapping("/updateblog")
     public String updateblog(Model model, @RequestParam int blogid, @RequestParam String blogcontent){
-        addBlogService.updateblog(blogid,blogcontent);
+        blogService.updateblog(blogid,blogcontent);
         model.addAttribute("name",sessionName);
-        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
         model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
         return "loginpage";
     }
 
-    @RequestMapping("/search")
+    @GetMapping("/search")
     public String searching(){
         return "search";
     }
 
-    @RequestMapping("/searching")
+    @PostMapping("/searching")
     public String search(Model model, @RequestParam String search){
-        List<BlogPost> list = addBlogService.search(search);
-        model.addAttribute("list",list);
-        List<Comment> commentList = commentService.getAll();
-        model.addAttribute("commentList",commentList);
-        return "searchresult";
-    }
-
-    @RequestMapping("/searchingByTag")
-    public String searchByTag(Model model, @RequestParam String excerpt){
-        List<BlogPost> list = addBlogService.searchByTag(excerpt);
+        System.err.println(search);
+        List<BlogPost> list = blogService.search(search);
+        if(list.isEmpty()){
+            model.addAttribute("yesEmpty","No Results Found");
+        }
         model.addAttribute("list",list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
@@ -218,9 +213,9 @@ public class BlogController {
 
     @RequestMapping("/removeBlog")
     public String removeBlog(Model model, @RequestParam int blogid){
-        addBlogService.removeBlog(blogid);
+        blogService.removeBlog(blogid);
         model.addAttribute("name",sessionName);
-        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
         model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
@@ -229,12 +224,13 @@ public class BlogController {
 
     @RequestMapping("/removeBlogAsAdmin")
     public String removeBlogAsAdmin(Model model, @RequestParam int blogid){
-        addBlogService.removeBlog(blogid);
+        blogService.removeBlog(blogid);
         model.addAttribute("name",sessionName);
-        List<BlogPost> list = (List<BlogPost>)addBlogService.getall();
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
         model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
         return "allblogs";
     }
+
 }

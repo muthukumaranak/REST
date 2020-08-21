@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class AddBlogService {
+public class BlogService {
 
     @Autowired
     BlogPostRepo blogPostRepo;
@@ -18,7 +18,7 @@ public class AddBlogService {
     public int addBlog(String name, String email, String title, String blogcontent, String excerpt){
         int id = 0;
         try {
-            SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String time = f.format(new Date());
             BlogPost blogPost = new BlogPost(name, email, title, blogcontent, 0, time, excerpt);
             blogPostRepo.save(blogPost);
@@ -52,9 +52,5 @@ public class AddBlogService {
         return list;
     }
 
-    public List<BlogPost> searchByTag(String excerpt) {
-        List<BlogPost> list = (List<BlogPost>)blogPostRepo.searchByTag(excerpt);
-        return list;
-    }
 
 }

@@ -26,11 +26,7 @@ public interface BlogPostRepo extends JpaRepository<BlogPost, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "select * from posts where title like %?1%",nativeQuery = true)
+    @Query(value = "select * from posts where authorname ilike %?1% or title ilike %?1% or excerpt ilike %?1% or time ilike %?1%",nativeQuery = true)
     List<BlogPost> search(String search);
 
-    @Transactional
-    @Modifying
-    @Query(value = "select * from posts where excerpt=?1",nativeQuery = true)
-    List<BlogPost> searchByTag(String search);
 }

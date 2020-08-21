@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 
-public interface RegistrationRepo extends JpaRepository<Users, Integer> {
+public interface UsersRepo extends JpaRepository<Users, Integer> {
 
     @Query(value = "SELECT password from users where email=?1",nativeQuery = true)
     String validateemail(String name);
