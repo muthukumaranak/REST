@@ -2,9 +2,11 @@ package com.example.blogapp.controller;
 
 import com.example.blogapp.entity.Comment;
 import com.example.blogapp.entity.BlogPost;
+import com.example.blogapp.entity.Users;
 import com.example.blogapp.repository.UsersRepo;
 import com.example.blogapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ import java.util.List;
 
 @Controller
 public class BlogController {
+
+    @Autowired
+    BlogServiceImpl blogServiceimpl;
 
     @Autowired
     UserService userService;
@@ -33,11 +38,12 @@ public class BlogController {
     BlogService blogService;
 
     public String sessionName;
+
     public String sessionEmail;
 
-    @RequestMapping("/index")
+    @RequestMapping("/login")
     public String index(){
-        return "index";
+        return "login";
     }
 
     @RequestMapping("/addblog")
@@ -70,22 +76,17 @@ public class BlogController {
     }
 
     @RequestMapping("/loginpage")
-        public String loginpage(Model model, @RequestParam String username, @RequestParam String password){
-            sessionEmail = username;
-            String result = loginService.logincheck(username,password);
-            sessionName = loginService.getName(username);
-            if(result.equals("positive")){
+        public String loginpage(Model model){
+                sessionName = userService.gettingName();
                 model.addAttribute("name",sessionName);
                 List<BlogPost> list = (List<BlogPost>) blogService.getall();
                 model.addAttribute("list", list);
                 List<Comment> commentList = commentService.getAll();
                 model.addAttribute("commentList",commentList);
-                return "loginpage";
-            }
-            return "indexerror";
+            return "loginpage";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/login2")
     public String login(Model model){
         model.addAttribute("name",sessionName);
         List<BlogPost> list = (List<BlogPost>) blogService.getall();
@@ -140,7 +141,7 @@ public class BlogController {
     public String register(@RequestParam String name, @RequestParam String email, @RequestParam String password ) {
         String result = userService.add(name,email,password);
         if(result.equals("positive"))
-            return "index";
+            return "login";
         else
             return "errorpage";
     }
@@ -231,6 +232,34 @@ public class BlogController {
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
         return "allblogs";
+    }
+
+    //pagination content
+
+    @GetMapping("/paginated")
+    public String viewHomePage(Model model) {
+        return findPaginated(1, "authorname", "asc", model);
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
+                                @RequestParam("sortField") String sortField,
+                                @RequestParam("sortDir") String sortDir,
+                                Model model) {
+        int pageSize = 5;
+        Page<BlogPost> page = blogServiceimpl.findPaginated(pageNo, pageSize, sortField, sortDir);
+        List<BlogPost> blogs = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+        model.addAttribute("blogs", blogs);
+        return "paginated";
     }
 
 }

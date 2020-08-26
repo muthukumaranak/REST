@@ -70,8 +70,8 @@
 </style>
 
 <body>
-<h1 class="heading"><span class="left">Add Blog Page!</span> <a href="/index"><span class="right">Log
-                Out</span></a><a href="/login"><span class="right">Home</span></a>
+<h1 class="heading"><span class="left">Add Blog Page!</span> <a href="/logout"><span class="right">Log
+                Out</span></a><a href="/loginpage"><span class="right">Home</span></a>
 
 </h1>
 
@@ -92,7 +92,7 @@
             <h3>Content</h3>
         </label>
         <textarea name="blogcontent" id="" cols="150" rows="50" placeholder="Enter your blog"></textarea> <br><br>
-
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <input type="submit" value="Post your Blog?">
     </form>
 </div>

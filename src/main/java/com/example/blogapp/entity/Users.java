@@ -24,6 +24,9 @@ public class Users {
     @Column(name = "role")
     public String role = "user";
 
+    @Column(name = "enabled")
+    private boolean enabled;
+
     public int getId() {
         return id;
     }
@@ -64,6 +67,14 @@ public class Users {
         this.role = role;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public Users(int id, String name, String email, String password) {
         this.id = id;
         this.name = name;
@@ -81,4 +92,8 @@ public class Users {
 
     public Users() {
     }
+
+
+
+
 }

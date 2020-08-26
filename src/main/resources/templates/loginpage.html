@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
@@ -95,7 +95,7 @@
 </style>
 
 <body>
-<h1 class="heading"><span class="left" th:text="'Welcome ' +${name}"></span><a href="/index"><span class="right">Log
+<h1 class="heading"><span class="left" th:text="Welcome"></span><a href="/logout"><span class="right">Log
                 Out</span></a><a href="/myblogs"><span class="right">My
                 Blogs</span></a>
     <a href="/addblog"><span class="right">New Blog</span></a>
@@ -124,6 +124,7 @@
     <form action="/addingComment" method="post">
         <input type="hidden" th:value="${temp.id}" name="blogid"/>
     <textarea name="comment" id="comment" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <input type="submit" value="Add your comment">
     <hr>
     </form>

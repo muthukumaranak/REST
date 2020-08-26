@@ -46,14 +46,14 @@
 <body>
 
     <div class="container">
-        <form action="/adminmodulecheck" method="post">
+        <form action="/adminmodule" method="post">
             <h3>Admin Login</h3>
             <label for="username">Email</label> <br>
             <input type="text" placeholder="abc@xyz.com" name="username" id="username" required><br>
 
             <label for="password">Password</label> <br>
             <input type="password" placeholder="Enter Password" name="password" id="password" required>
-
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <input type="submit" value="Login">
 
         </form>

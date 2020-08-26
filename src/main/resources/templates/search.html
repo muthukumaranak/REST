@@ -103,18 +103,19 @@
 
 <body>
 
-
-<h1 class="heading"><span class="left">Welcome Guest</span> <a href="/index"><span class="right">Log
+<h1 class="heading"><span class="left">Welcome Guest</span> <a href="/login"><span class="right">Log
                 In</span></a></h1>
 
 <div class="wrapper">
     <form action="/searching" method="post">
         <input type="text" name="search" placeholder="Enter Keyword for search" required></input>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <input type="submit" value="Search"></input>
     </form>
 
     <form action="/searching" method="post">
         <input type="date" name="search" required></input>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <input type="submit" value="Search"></input>
     </form>
 

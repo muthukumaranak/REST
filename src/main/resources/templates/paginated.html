@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blog App</title>
+</head>
+
+
+<style>
+    body {
+        font-size: 1.5em;
+    }
+
+    .wrapper {
+        padding: 20px;
+        margin-left: 25px;
+    }
+
+    input[type=text], select {
+        width: 50%;
+        border: 0.5px solid red;
+        padding: 15px;
+    }
+
+    textarea {
+        padding: 15px;
+        width: 50%;
+        border: 0.5px solid red;
+    }
+
+    input[type=submit] {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: .8em !important;
+        width: 50%;
+    }
+
+    .heading {
+        font-size: 1.5em !important;
+        background-color: wheat;
+        overflow: auto;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .left {
+        float: left;
+        margin-left: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right {
+        float: right;
+        margin-right: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right:hover {
+        background-color: red;
+        color: white;
+    }
+</style>
+
+<body>
+
+    <a th:href="@{'/page/' + ${currentPage} + '?sortField=authorname&sortDir=' + ${reverseSortDir}}">
+        Sort By Author Name</a> &nbsp; &nbsp;&nbsp; &nbsp;
+
+    <a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">
+        Sort By Title</a> &nbsp; &nbsp;&nbsp; &nbsp;
+
+    <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+        Sort By Email</a> &nbsp; &nbsp;&nbsp; &nbsp;
+
+    <a th:href="@{'/page/' + ${currentPage} + '?sortField=time&sortDir=' + ${reverseSortDir}}">
+        Sort By Time</a> &nbsp; &nbsp;&nbsp; &nbsp;
+
+    <div th:each="temp:${blogs}">
+        <hr>
+        <h2 th:text="${temp.title}">
+        </h2>
+        <hr>
+        <h3 th:text="'Author Name: '+${temp.authorname}"></h3>
+        <h5 th:text="'Published: '+${temp.time}"></h5>
+        <h5 th:text="'Tag: '+${temp.excerpt}"></h5>
+        <p th:text="${temp.blogcontent}"></p>
+
+    </div>
+
+<div th:if = "${totalPages > 1}">
+            Total Rows: [[${totalItems}]]
+        </div>
+
+    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+        <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+        <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+    </span>
+
+    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+    <span th:unless="${currentPage < totalPages}">Next</span>
+
+    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+    <span th:unless="${currentPage < totalPages}">Last</span>
+
+</body>
+</html>

@@ -65,24 +65,28 @@
 
 <body>
     <div class="container">
-        <form action="/loginpage" method="post">
+        <form action="/login" method="post">
             <h3>Login Page</h3>
             <label for="username">Email</label> <br>
             <input type="text" placeholder="abc@xyz.com" name="username" id="username" required><br>
             <label for="password">Password</label> <br>
             <input type="password" placeholder="Enter Password" name="password" id="password" required>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <input type="submit" value="Login" class="loginbtn">
         </form>
 
         <form action="/guest" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <input type="submit" value="Guest">
         </form>
 
-        <form action="/registrationpage" method="post">
+        <form action="/registrationpage" method="">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <input type="submit" value="New User">
         </form>
 
         <form action="/adminlogin" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <input type="submit" value="Admin Panel">
         </form>
     </div>
