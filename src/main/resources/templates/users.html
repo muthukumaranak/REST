@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -73,10 +73,9 @@
 </style>
 
 <body>
-    <h1 class="heading"><span class="left">Users Page</span> <a href="/logout"><span class="right">Log
-                Out</span></a><a href="/displayallblogs"><span class="right">View
-                Blogs</span></a>
-        <a href="/adminmodule"><span class="right">Home</span></a>
+    <h1 class="heading"><span class="left">Users Page</span> <a sec:authorize="isAuthenticated()" href="/logout"><span class="right">Log
+                Out</span></a><a href="/allblogs">
+        <a href="/loginpage"><span class="right">Home</span></a>
     </h1>
 
     <div class="tab">

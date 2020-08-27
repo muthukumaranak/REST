@@ -66,6 +66,10 @@
         padding: 10px;
         font-size: .8em !important;
     }
+    input[type=text]{
+        margin-left: 60px;
+        padding: 10px;
+    }
 
     details {
         margin-left: 65px;
@@ -123,12 +127,12 @@
     </select> <br><br>
     <input type="submit" value="Filter By Tags">
 </form>
-
-<form action="/searching" method="post">
+<!--
+<form action="/FilterByName" method="post">
     <input type="date" name="search" required></input>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <input type="submit" value="Filter By Date"></input>
-</form>
+</form>           -->
 
 <div th:each="temp:${blogs}">
     <hr>
@@ -143,15 +147,30 @@
         <summary>View Comments</summary>
         <div  th:each="temp2:${commentList}">
             <li th:if="${temp.id} == ${temp2.blogid}" th:text="${temp2.commentby} + ' : ' + ${temp2.comment}"><hr></li>
+            <form action="/CommentDeletion2" method="post">
+                <input type="hidden" th:value="${temp2.id}" name="commentid"/>
+
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <input type="submit" value="Delete comment">
+            </form>
         </div>
     </details> <br>
-    <form action="/addingComment" method="post">
+    <form action="/addingComment2" method="post">
         <input type="hidden" th:value="${temp.id}" name="blogid"/>
+        <input type="text" placeholder="Enter your guest Name" name="name"><br>
         <textarea name="comment" id="comment" cols="50" rows="5" placeholder="Enter your comments"></textarea><br><br>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <input type="submit" value="Add your comment">
+    </form>
+    <!--del as guest-->
+    <form action="/delasGuest" method="post">
+        <input type="hidden" th:value="${temp.id}" name="blogid"/>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <input type="text" name="email" placeholder="Enter the email Id to delete"><br>
+        <input type="submit" value="Delete this Blog as Guest">
         <hr>
     </form>
+
 </div>
 
 <div th:if = "${totalPages > 1}">

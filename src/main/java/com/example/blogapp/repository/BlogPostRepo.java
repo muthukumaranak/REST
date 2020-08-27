@@ -18,11 +18,6 @@ public interface BlogPostRepo extends JpaRepository<BlogPost, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "update posts set likes = ?1 where id = ?2",nativeQuery = true)
-    void postLike(int likes, int bid);
-
-    @Transactional
-    @Modifying
     @Query(value = "update posts set blogcontent=?1 where id=?2",nativeQuery = true)
     void updateblogs(String blogcontent,int blogid);
 
@@ -34,4 +29,6 @@ public interface BlogPostRepo extends JpaRepository<BlogPost, Integer> {
     @Query(value = "select * from posts where authorname=?1 or excerpt=?1 or time=?1",nativeQuery = true)
     Page<BlogPost> findAllByName(Pageable pageable, String filtername);
 
+    @Query(value = "select email from posts where id=?1",nativeQuery = true)
+    String email(int id);
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://thymeleaf.org">
+<html xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -70,7 +70,7 @@
 </style>
 
 <body>
-<h1 class="heading"><span class="left">Add Blog Page!</span> <a href="/logout"><span class="right">Log
+<h1 class="heading"><span class="left">Add Blog Page!</span> <a sec:authorize="isAuthenticated()" href="/logout"><span class="right">Log
                 Out</span></a><a href="/loginpage"><span class="right">Home</span></a>
 
 </h1>

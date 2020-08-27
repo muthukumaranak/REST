@@ -3,7 +3,6 @@ package com.example.blogapp.service;
 import com.example.blogapp.entity.BlogPost;
 import com.example.blogapp.repository.BlogPostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -44,9 +43,6 @@ public class BlogService {
         blogPostRepo.updateblogs(blogcontent,blogid);
     }
 
-    public void addLike(int bid, int likes) {
-        blogPostRepo.postLike(likes, bid);
-    }
 
     public List<BlogPost> search(String searchvalue) {
         List<BlogPost> list = (List<BlogPost>)blogPostRepo.search(searchvalue);

@@ -19,12 +19,11 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService implements UserServiceInterface {
 
     String session_user_name;
 
-    @Autowired
-    UsersRepo usersRepo;
+    private UsersRepo usersRepo;
 
     @Autowired
     BlogPostRepo blogPostRepo;
@@ -32,17 +31,16 @@ public class UserService implements UserDetailsService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public String add(String name,  String email,  String password){
-        try {
-        Users users = new Users(name,email,bCryptPasswordEncoder.encode(password));
-        users.setRole("ROLE_USER");
-        users.setEnabled(true);
-        usersRepo.save(users);}
-        catch (Exception e){
-            System.out.println(e);
-            return "negative";
-        }
-        return "positive";
+    public UserService(UsersRepo usersRepo) {
+        super();
+        this.usersRepo = usersRepo;
+    }
+
+    @Override
+    public Users save(UserRegistrationDto registrationDto) {
+        Users users = new Users(registrationDto.getName(),registrationDto.getEmail(),
+                bCryptPasswordEncoder.encode(registrationDto.getPassword()), registrationDto.getRoles());
+        return usersRepo.save(users);
     }
 
     public List<Object[]> getall() {
@@ -68,6 +66,18 @@ public class UserService implements UserDetailsService {
 
     public String gettingName(){
         return usersRepo.getName(session_user_name);
+    }
+
+    public String add(String name,  String email,  String password){
+        try {
+            Users users = new Users(name,email,bCryptPasswordEncoder.encode(password));
+            users.setRole("user");
+            usersRepo.save(users);}
+        catch (Exception e){
+            System.out.println(e);
+            return "negative";
+        }
+        return "positive";
     }
 
 }

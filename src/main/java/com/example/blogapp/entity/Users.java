@@ -1,10 +1,8 @@
 package com.example.blogapp.entity;
 
-
 import javax.persistence.*;
-
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Users {
 
     @Id
@@ -15,7 +13,7 @@ public class Users {
     @Column(name = "name")
     public String name;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     public String email;
 
     @Column(name = "password")
@@ -24,8 +22,6 @@ public class Users {
     @Column(name = "role")
     public String role = "user";
 
-    @Column(name = "enabled")
-    private boolean enabled;
 
     public int getId() {
         return id;
@@ -67,14 +63,6 @@ public class Users {
         this.role = role;
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public Users(int id, String name, String email, String password) {
         this.id = id;
         this.name = name;
@@ -90,10 +78,9 @@ public class Users {
         this.role = "user";
     }
 
-    public Users() {
+    public Users(String name, String email, String encode, String roles) {
     }
 
-
-
-
+    public Users() {
+    }
 }
