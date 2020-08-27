@@ -7,6 +7,8 @@ import com.example.blogapp.repository.UsersRepo;
 import com.example.blogapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -53,11 +55,7 @@ public class BlogController {
 
     @RequestMapping("/guest")
     public String guest(Model model){
-        List<BlogPost> list = (List<BlogPost>) blogService.getall();
-        model.addAttribute("list", list);
-        List<Comment> commentList = commentService.getAll();
-        model.addAttribute("commentList",commentList);
-        return "Guest";
+        return findPaginated(1, "authorname", "asc", model);
     }
 
     @RequestMapping("/adminlogin")
@@ -67,7 +65,17 @@ public class BlogController {
 
     @RequestMapping("/adminmodule")
     public String adminmodule(){
-        return "adminmodule";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        Users users = usersRepo.findByEmail(auth.getName());
+        System.out.print(users);
+        if(users == null){
+            return "adminloginerror";
+        }
+        if(users.getRole().equals("ROLE_USER"))
+            return "adminmodule";
+        else
+            return "adminloginerror";
     }
 
     @RequestMapping("/allblogs")
@@ -76,14 +84,14 @@ public class BlogController {
     }
 
     @RequestMapping("/loginpage")
-        public String loginpage(Model model){
-                sessionName = userService.gettingName();
-                model.addAttribute("name",sessionName);
-                List<BlogPost> list = (List<BlogPost>) blogService.getall();
-                model.addAttribute("list", list);
-                List<Comment> commentList = commentService.getAll();
-                model.addAttribute("commentList",commentList);
-            return "loginpage";
+    public String loginpage(Model model){
+        sessionName = userService.gettingName();
+        model.addAttribute("name",sessionName);
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
+        model.addAttribute("list", list);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
+        return "loginpage";
     }
 
     @RequestMapping("/login2")
@@ -99,17 +107,17 @@ public class BlogController {
     @RequestMapping("/displayallblogs")
     public String displayallblogs(Model model){
         model.addAttribute("name",sessionName);
-            List<BlogPost> list = (List<BlogPost>) blogService.getall();
-            model.addAttribute("list", list);
+        List<BlogPost> list = (List<BlogPost>) blogService.getall();
+        model.addAttribute("list", list);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList",commentList);
-            return "allblogs";
+        return "allblogs";
     }
 
     @RequestMapping("/allusers")
     public String allusers(Model model){
-            List<Object[]> list = userService.getall();
-            model.addAttribute("list",list);
+        List<Object[]> list = userService.getall();
+        model.addAttribute("list",list);
         return "users";
     }
 
@@ -158,6 +166,15 @@ public class BlogController {
         return "loginpage";
     }
 
+    @GetMapping("/addblogasguest")
+    public String addblogasguest(){
+        return "addblogasguest";
+    }
+    @PostMapping("/addingblogasguest")
+    public String PostBlog(Model model, @RequestParam String name, @RequestParam String email, @RequestParam String title,@RequestParam String excerpt, @RequestParam String blogcontent){
+        blogService.addBlog(name, email, title, blogcontent, excerpt);
+        return findPaginated(1, "authorname", "asc", model);
+    }
     @PostMapping("/addingComment")
     public String addingComment(Model model, @RequestParam String blogid, @RequestParam String comment){
         int bid = Integer.parseInt(blogid);
@@ -246,10 +263,9 @@ public class BlogController {
                                 @RequestParam("sortField") String sortField,
                                 @RequestParam("sortDir") String sortDir,
                                 Model model) {
-        int pageSize = 5;
+        int pageSize = 10;
         Page<BlogPost> page = blogServiceimpl.findPaginated(pageNo, pageSize, sortField, sortDir);
         List<BlogPost> blogs = page.getContent();
-
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
@@ -259,7 +275,35 @@ public class BlogController {
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
         model.addAttribute("blogs", blogs);
-        return "paginated";
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
+        return "guest";
     }
 
+    @GetMapping("/FilterByName")
+    public String filterByName(Model model, @RequestParam String filterbyname){
+        return findPaginated2(1,"authorname","asc",model, filterbyname);
+    }
+
+
+    public String findPaginated2(@PathVariable (value = "pageNo") int pageNo,
+                                 @RequestParam("sortField") String sortField,
+                                 @RequestParam("sortDir") String sortDir,
+                                 Model model, String filerbyname) {
+        int pageSize = 10;
+        Page<BlogPost> page = blogServiceimpl.findPaginated2(pageNo, pageSize, sortField, sortDir,filerbyname);
+        List<BlogPost> blogs = page.getContent();
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+        model.addAttribute("blogs", blogs);
+        List<Comment> commentList = commentService.getAll();
+        model.addAttribute("commentList",commentList);
+        return "guest";
+    }
 }

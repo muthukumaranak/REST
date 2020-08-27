@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+</head>
+
+<style>
+    body {
+        font-size: 1.5em;
+    }
+
+    .wrapper {
+        padding: 20px;
+        margin-left: 25px;
+    }
+
+    input[type=text], select {
+        width: 50%;
+        border: 0.5px solid red;
+        padding: 15px;
+    }
+
+    textarea {
+        padding: 15px;
+        width: 50%;
+        border: 0.5px solid red;
+    }
+
+    input[type=submit] {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: .8em !important;
+        width: 50%;
+    }
+
+    .heading {
+        font-size: 1.5em !important;
+        background-color: wheat;
+        overflow: auto;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .left {
+        float: left;
+        margin-left: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right {
+        float: right;
+        margin-right: 30px;
+        font-weight: normal !important;
+        padding: 20px;
+    }
+
+    .right:hover {
+        background-color: red;
+        color: white;
+    }
+</style>
+
+<body>
+<h1 class="heading"><span class="left">Guest Blog Page!</span><a href="/guest"><span class="right">Back to Guest page</span></a>
+
+</h1>
+
+<div class="wrapper">
+    <form action="/addingblogasguest" method="post">
+        <h2>Create Your Blog Here!</h2>
+        <hr>
+        <label for="name">
+            <h3>Name</h3>
+        </label>
+        <input type="text" name="name" id="name" placeholder="Please Enter your name">
+        <hr>
+
+        <label for="email">
+            <h3>Email</h3>
+        </label>
+        <input type="text" name="email" id="email" placeholder="Please Enter your Email">
+        <hr>
+
+        <label for="heading">
+            <h3>Title</h3>
+        </label>
+        <input type="text" name="title" id="heading" placeholder="Please Enter your heading for blog">
+        <hr>
+
+        <label for="excerpt"><h3>Give Tags</h3></label>
+        <input type="text" name="excerpt" id="excerpt" placeholder="Please Enter Tags separate it by , comma">
+        <label>
+            <hr>
+            <h3>Content</h3>
+        </label>
+        <textarea name="blogcontent" id="" cols="150" rows="50" placeholder="Enter your blog"></textarea> <br><br>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <input type="submit" value="Post your Blog?">
+    </form>
+</div>
+</body>
+
+</html>
