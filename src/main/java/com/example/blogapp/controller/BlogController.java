@@ -174,30 +174,6 @@ public class BlogController {
         return "loginpage";
     }
 
-
-    @PostMapping("/searching")
-    public String search(Model model, @RequestParam String search) {
-        List<BlogPost> list = blogService.search(search);
-        if (list.isEmpty()) {
-            model.addAttribute("yesEmpty", "No Results Found");
-        }
-        model.addAttribute("list", list);
-        List<Comment> commentList = commentService.getAll();
-        model.addAttribute("commentList", commentList);
-        return "searchresult";
-    }
-
-    @RequestMapping("/removeBlog")
-    public String removeBlog(Model model, @RequestParam int blogid) {
-        blogService.removeBlog(blogid);
-        model.addAttribute("name", sessionName);
-        List<BlogPost> list = (List<BlogPost>) blogService.getall();
-        model.addAttribute("list", list);
-        List<Comment> commentList = commentService.getAll();
-        model.addAttribute("commentList", commentList);
-        return "myblogs";
-    }
-
     @RequestMapping("/removeBlogAsAdmin")
     public String removeBlogAsAdmin(Model model, @RequestParam int blogid) {
         blogService.removeBlog(blogid);
