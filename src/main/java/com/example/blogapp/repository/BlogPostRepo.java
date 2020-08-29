@@ -31,4 +31,10 @@ public interface BlogPostRepo extends JpaRepository<BlogPost, Integer> {
 
     @Query(value = "select email from posts where id=?1",nativeQuery = true)
     String email(int id);
+
+    List<BlogPost> findAllById(int blogId);
+
+
+    @Query(value = "select * from posts where authorname ilike %?1% and blogcontent ilike %?2% and excerpt ilike %?3%",nativeQuery = true)
+    List<BlogPost> filter(String name, String content, String excerpt);
 }

@@ -9,22 +9,18 @@ import com.example.blogapp.repository.UsersRepo;
 import com.example.blogapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class BlogController {
 
     @Autowired
     BlogServiceImpl blogServiceimpl;
 
-    @Autowired
-    UserService userService;
+
 
     @Autowired
     TagsService tagsService;
@@ -53,17 +49,18 @@ public class BlogController {
         return "login";
     }
 
+   // @RequestMapping(value = "/blog", method = RequestMethod.POST)
     @RequestMapping("/addblog")
     public String addblog() {
         return "addblog";
     }
 
     @RequestMapping("/guest")
-    public String guest(Model model) {
+    public Page<BlogPost> guest(Model model) {
         return findPaginated(1, "authorname", "asc", model);
     }
 
-
+/*
     @RequestMapping("/allblogs")
     public String allblogs() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -91,12 +88,7 @@ public class BlogController {
         return "loginpage";
     }
 
-    @RequestMapping("/allusers")
-    public String allusers(Model model) {
-        List<Object[]> list = userService.getall();
-        model.addAttribute("list", list);
-        return "users";
-    }
+
 
     @RequestMapping("/myblogs")
     public String myblogs(Model model) {
@@ -121,10 +113,8 @@ public class BlogController {
 
     @PostMapping("/registration")
     public String register(@RequestParam String name, @RequestParam String email, @RequestParam String password) {
-        String result = userService.add(name, email, password);
-        if (result.equals("positive"))
-            return "login";
-        else
+       // String result = userService.add(name, email, password);
+
             return "errorpage";
     }
 
@@ -146,7 +136,7 @@ public class BlogController {
     }
 
     @PostMapping("/addingblogasguest")
-    public String PostBlog(Model model, @RequestParam String name, @RequestParam String email, @RequestParam String title, @RequestParam String excerpt, @RequestParam String blogcontent) {
+    public Page<BlogPost> PostBlog(Model model, @RequestParam String name, @RequestParam String email, @RequestParam String title, @RequestParam String excerpt, @RequestParam String blogcontent) {
         blogService.addBlog(name, email, title, blogcontent, excerpt);
         return findPaginated(1, "authorname", "asc", model);
     }
@@ -161,7 +151,7 @@ public class BlogController {
         model.addAttribute("commentList", commentList);
         return "loginpage";
     }
-
+*/
     @PostMapping("/addingComment2")
     public String addingComment2(Model model, @RequestParam int blogid, @RequestParam String name, @RequestParam String comment) {
         commentService.addComment(blogid, comment, name);
@@ -184,14 +174,9 @@ public class BlogController {
         return "loginpage";
     }
 
-    @GetMapping("/search")
-    public String searching() {
-        return "search";
-    }
 
     @PostMapping("/searching")
     public String search(Model model, @RequestParam String search) {
-        System.err.println(search);
         List<BlogPost> list = blogService.search(search);
         if (list.isEmpty()) {
             model.addAttribute("yesEmpty", "No Results Found");
@@ -224,15 +209,14 @@ public class BlogController {
         return "redirect:/loginpage";
     }
 
-    //pagination content
     @GetMapping("/paginated")
-    public String viewHomePage(Model model) {
+    public Page<BlogPost> viewHomePage(Model model) {
         return findPaginated(1, "authorname", "asc", model);
     }
 
     @GetMapping("/page/{pageNo}")
-    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, @RequestParam("sortField") String sortField,
-                                @RequestParam("sortDir") String sortDir, Model model) {
+    public Page<BlogPost> findPaginated(@PathVariable(value = "pageNo") int pageNo, @RequestParam("sortField") String sortField,
+                                        @RequestParam("sortDir") String sortDir, Model model) {
         int pageSize = 10;
         Page<BlogPost> page = blogServiceimpl.findPaginated(pageNo, pageSize, sortField, sortDir);
         List<BlogPost> blogs = page.getContent();
@@ -247,7 +231,7 @@ public class BlogController {
         model.addAttribute("blogs", blogs);
         List<Comment> commentList = commentService.getAll();
         model.addAttribute("commentList", commentList);
-        return "guest";
+        return page;
     }
 
     @GetMapping("/FilterByName")

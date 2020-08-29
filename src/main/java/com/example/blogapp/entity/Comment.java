@@ -10,8 +10,9 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
 
-    @Column(name = "blogid")
-    public int blogid;
+    @ManyToOne
+    @JoinColumn(name = "blogid", referencedColumnName = "id")
+    public BlogPost blogPost;
 
     @Column(name = "comment")
     public String comment;
@@ -27,12 +28,12 @@ public class Comment {
         this.id = id;
     }
 
-    public int getBlogid() {
-        return blogid;
+    public BlogPost getBlogPost() {
+        return blogPost;
     }
 
-    public void setBlogid(int blogid) {
-        this.blogid = blogid;
+    public void setBlogPost(BlogPost blogPost) {
+        this.blogPost = blogPost;
     }
 
     public String getComment() {
@@ -51,29 +52,12 @@ public class Comment {
         this.commentby = commentby;
     }
 
-    public Comment(int blogid, String comment, String commentby) {
-        this.blogid = blogid;
-        this.comment = comment;
-        this.commentby = commentby;
-    }
-
-    public Comment(int id, int blogid, String comment, String commentby) {
-        this.id = id;
-        this.blogid = blogid;
+    public Comment(BlogPost blogPost, String comment, String commentby) {
+        this.blogPost = blogPost;
         this.comment = comment;
         this.commentby = commentby;
     }
 
     public Comment() {
-    }
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", blogid=" + blogid +
-                ", comment='" + comment + '\'' +
-                ", commentby='" + commentby + '\'' +
-                '}';
     }
 }

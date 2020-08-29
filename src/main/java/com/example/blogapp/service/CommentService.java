@@ -17,8 +17,8 @@ public class CommentService {
 
     public void addComment(int blogid, String comment, String commentby){
         try {
-            Comment commentObj = new Comment(blogid,comment,commentby);
-            commentRepo.save(commentObj);
+           // Comment commentObj = new Comment(blogid,comment,commentby);
+            //commentRepo.save(commentObj);
         }
         catch (Exception e){
             System.out.println(e);

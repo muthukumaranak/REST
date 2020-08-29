@@ -1,6 +1,7 @@
 package com.example.blogapp.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -31,6 +32,9 @@ public class BlogPost {
 
     @Column(name = "excerpt")
     public String excerpt;
+
+    @OneToMany(mappedBy = "blogPost", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = Comment.class)
+    public List<Comment> commentList;
 
     public String getExcerpt() {
         return excerpt;
@@ -120,17 +124,11 @@ public class BlogPost {
     public BlogPost() {
     }
 
-    @Override
-    public String toString() {
-        return "BlogPost{" +
-                "id=" + id +
-                ", authorname='" + authorname + '\'' +
-                ", email='" + email + '\'' +
-                ", title='" + title + '\'' +
-                ", blogcontent='" + blogcontent + '\'' +
-                ", likes=" + likes +
-                ", time='" + time + '\'' +
-                ", excerpt='" + excerpt + '\'' +
-                '}';
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 }
