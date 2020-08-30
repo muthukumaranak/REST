@@ -1,24 +1,32 @@
 package com.example.blogapp.entity;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "post_tags")
+@ApiModel(description="PostTag Details")
 public class PostTags {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @ApiModelProperty(notes = "Auto Generated ID")
     public int id;
 
+    @ApiModelProperty(notes = "Tag ID")
     @Column(name = "tag_id")
     public int tag_id;
 
     @Column(name = "created_at")
+    @ApiModelProperty(notes = "Created At")
     public String created_at;
 
     @Column(name = "updated_at")
+    @ApiModelProperty(notes = "Updated At")
     public String updated_at;
 
     public int getId() {

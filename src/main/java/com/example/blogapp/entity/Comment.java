@@ -1,22 +1,30 @@
 package com.example.blogapp.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Comment")
+@ApiModel(description="Comment Details")
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "Auto Generated ID for Comment")
     public int id;
 
     @ManyToOne
     @JoinColumn(name = "blogid", referencedColumnName = "id")
+    @ApiModelProperty(notes = "Blog Id for which comment is created")
     public BlogPost blogPost;
 
+    @ApiModelProperty(notes = "Comment")
     @Column(name = "comment")
     public String comment;
 
+    @ApiModelProperty(notes = "Commented By")
     @Column(name = "commentby")
     public String commentby;
 

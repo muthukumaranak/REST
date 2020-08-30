@@ -1,38 +1,51 @@
 package com.example.blogapp.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "posts")
+@ApiModel(description="Blog Post Details")
 public class BlogPost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @ApiModelProperty(notes = "Auto Generated Blog ID ID")
     public int id;
 
+    @ApiModelProperty(notes = "Author Name")
     @Column(name = "authorname")
     public String authorname;
 
+    @ApiModelProperty(notes = "Author Email")
     @Column(name = "email")
     public String email;
 
+    @ApiModelProperty(notes = "Blog Title")
     @Column(name = "title")
     public String title;
 
+    @ApiModelProperty(notes = "Blog Content")
     @Column(name = "blogcontent")
     public String blogcontent;
 
+    @ApiModelProperty(notes = "Blog Likes")
     @Column(name = "likes")
     public int likes;
 
+    @ApiModelProperty(notes = "Created Time of Blog")
     @Column(name = "time")
     public String time;
 
+    @ApiModelProperty(notes = "Excerpts for Blog")
     @Column(name = "excerpt")
     public String excerpt;
 
+    @ApiModelProperty(notes = "Comments given for Blog")
     @OneToMany(mappedBy = "blogPost", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = Comment.class)
     public List<Comment> commentList;
 

@@ -1,24 +1,33 @@
 package com.example.blogapp.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@ApiModel(description = "User Details")
 public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @ApiModelProperty(notes = "Auto Generated ID")
     public int id;
 
+    @ApiModelProperty(notes = "Name")
     @Column(name = "name")
     public String name;
 
+    @ApiModelProperty(notes = "Email")
     @Column(name = "email")
     public String email;
 
+    @ApiModelProperty(notes = "Password")
     @Column(name = "password")
     public String password;
 
+    @ApiModelProperty(notes = "Roles")
     @Column(name = "role")
     public String role = "user";
 
