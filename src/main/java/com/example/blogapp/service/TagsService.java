@@ -15,20 +15,14 @@ public class TagsService {
     @Autowired
     TagsRepo tagsRepo;
 
-    @Autowired
-    PostTagsService postTagsService;
-
     public void addTags(String excerpt) {
         SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String time = f.format(new Date());
         String allTags[] = excerpt.split(",");
-
         for(String tag: allTags){
             Tags tags = new Tags(tag,time,time);
             tagsRepo.save(tags);
             int tagId = tags.getId();
-            postTagsService.addTags(tagId,time);
         }
-
     }
 }

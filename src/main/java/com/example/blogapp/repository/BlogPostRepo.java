@@ -13,8 +13,6 @@ import java.util.List;
 
 public interface BlogPostRepo extends JpaRepository<BlogPost, Integer> {
 
-    @Query(value = "select authorname, count(authorname) as count FROM posts group by authorname order by authorname asc",nativeQuery = true)
-    List<Object[]> getCount();
 
     @Transactional
     @Modifying
@@ -34,7 +32,13 @@ public interface BlogPostRepo extends JpaRepository<BlogPost, Integer> {
 
     List<BlogPost> findAllById(int blogId);
 
-
     @Query(value = "select * from posts where authorname ilike %?1% and blogcontent ilike %?2% and excerpt ilike %?3%",nativeQuery = true)
     List<BlogPost> filter(String name, String content, String excerpt);
+
+    @Query(value = "select * from posts where authorname like %?1% or blogcontent like %?1% or excerpt like %?1% or time like %?1%\n" +
+            "and authorname like %?2% and blogcontent like %?3% and excerpt like %?4%", nativeQuery = true)
+    List<BlogPost> filterAndSearch(String keyword, String name, String content, String excerpt);
+
+    @Query(value = "select * from posts where email=?1",nativeQuery = true)
+    List<BlogPost> findAllByEmail(String email);
 }
