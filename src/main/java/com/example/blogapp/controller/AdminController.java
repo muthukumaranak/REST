@@ -1,14 +1,13 @@
 package com.example.blogapp.controller;
 
-import com.example.blogapp.entity.Users;
-import com.example.blogapp.repository.BlogPostRepo;
-import com.example.blogapp.repository.CommentRepo;
-import com.example.blogapp.repository.UsersRepo;
+import com.example.blogapp.service.BlogServiceImpl;
+import com.example.blogapp.service.CommentService;
 import com.example.blogapp.service.UserDTO;
+import com.example.blogapp.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -17,50 +16,28 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    BlogPostRepo blogPostRepo;
+    BlogServiceImpl blogService;
 
     @Autowired
-    CommentRepo commentRepo;
+    CommentService commentService;
 
     @Autowired
-    UsersRepo usersRepo;
+    UserDetailsService userDetailsService;
 
     @GetMapping("/users")
-    public List<UserDTO> users(){
-        List<UserDTO> list = new ArrayList<>();
-        List<Users> users = usersRepo.findAll();
-        users.forEach(user -> {
-            UserDTO userDTO = new UserDTO();
-            userDTO.setId(user.getId());
-            userDTO.setName(user.getName());
-            list.add(userDTO);
-        });
-        return list;
+    public List<UserDTO> users(HttpServletRequest request) {
+        //System.out.println(request.getAttribute("userid"));
+        return userDetailsService.getAllUsers();
     }
 
     @DeleteMapping("/deletepost")
-    public String deletepost(@RequestParam String id){
-        try{
-            int blogId = Integer.parseInt(id);
-            blogPostRepo.deleteById(blogId);
-            return "Deleted";
-        }
-        catch (Exception e){
-            return "Cannot Delete";
-        }
+    public String deletepost(@RequestParam String id) {
+        return blogService.delete(id);
     }
 
     @DeleteMapping("/deletecomment")
-    public String deletecomment(@RequestParam String id){
-        try{
-            int commentId = Integer.parseInt(id);
-            commentRepo.delete(commentId);
-            return "Deleted";
-        }
-        catch (Exception e){
-            return "Cannot be Deleted";
-        }
+    public String deletecomment(@RequestParam String id) {
+        return commentService.delete(id);
     }
-
 
 }
