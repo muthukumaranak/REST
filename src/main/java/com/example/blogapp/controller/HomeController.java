@@ -1,6 +1,5 @@
 package com.example.blogapp.controller;
 
-import com.example.blogapp.entity.BlogPost;
 import com.example.blogapp.model.JwtRequest;
 import com.example.blogapp.service.*;
 import io.swagger.annotations.Api;
@@ -41,7 +40,7 @@ public class HomeController {
     @ApiOperation(value = "Searching a Blog", response = List.class)
     @ApiParam(value = "Keyword", required = true)
     @GetMapping("/search")
-    public List<BlogPost> search(@RequestParam String keyword) {
+    public List<BlogPostDTO> search(@RequestParam String keyword) {
         return blogService.search(keyword);
     }
 
@@ -55,15 +54,14 @@ public class HomeController {
     @ApiOperation(value = "Filtering and Searching", response = List.class)
     @ApiParam(value = "Keyword, Authorname, Content, Excerpt", required = true)
     @GetMapping("/filterAndSearch")
-    public List<BlogPost> filterAndSearch(@RequestParam String keyword, @RequestParam String name, @RequestParam String content, @RequestParam String excerpt) {
+    public List<BlogPostDTO> filterAndSearch(@RequestParam String keyword, @RequestParam String name, @RequestParam String content, @RequestParam String excerpt) {
         return blogService.filterAndSearch(keyword, name, content, excerpt);
     }
-
 
     @ApiOperation(value = "Pagination", response = List.class)
     @ApiParam(value = "Page no, Sort by, Sort Direction(asc,des), limit for Page", required = true)
     @GetMapping("/page")
-    public List<BlogPostDTO> Paginated(@RequestParam int page, @RequestParam String sort, @RequestParam String direction, @RequestParam String limit) {
+    public List<BlogPostDTO> Paginated(@RequestParam String page, @RequestParam String sort, @RequestParam String direction, @RequestParam String limit) {
         return blogService.paginated(page, sort, direction, limit);
     }
 

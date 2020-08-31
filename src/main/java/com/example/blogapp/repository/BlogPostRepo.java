@@ -35,8 +35,8 @@ public interface BlogPostRepo extends JpaRepository<BlogPost, Integer> {
     @Query(value = "select * from posts where authorname ilike %?1% and blogcontent ilike %?2% and excerpt ilike %?3%",nativeQuery = true)
     List<BlogPost> filter(String name, String content, String excerpt);
 
-    @Query(value = "select * from posts where authorname like %?1% or blogcontent like %?1% or excerpt like %?1% or time like %?1%\n" +
-            "and authorname like %?2% and blogcontent like %?3% and excerpt like %?4%", nativeQuery = true)
+    @Query(value = "select * from posts where authorname ilike %?1% or blogcontent ilike %?1% or excerpt ilike %?1% or time ilike %?1%\n" +
+            "and authorname ilike %?2% and blogcontent ilike %?3% and excerpt ilike %?4%", nativeQuery = true)
     List<BlogPost> filterAndSearch(String keyword, String name, String content, String excerpt);
 
     @Query(value = "select * from posts where email=?1",nativeQuery = true)

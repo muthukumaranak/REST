@@ -1,10 +1,8 @@
 package com.example.blogapp.controller;
 
-import com.example.blogapp.service.BlogServiceImpl;
-import com.example.blogapp.service.CommentService;
-import com.example.blogapp.service.UserDTO;
-import com.example.blogapp.service.UserDetailsService;
+import com.example.blogapp.service.*;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +26,24 @@ public class AdminController {
     @Autowired
     UserDetailsService userDetailsService;
 
+    @Autowired
+    JwtUtil jwtUtil;
+
+    public String username = null;
+
     @ApiOperation(value = "View a list of available users", response = List.class)
     @ApiParam(value = "UserName, Password", required = true)
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     @GetMapping("/users")
     public List<UserDTO> users(HttpServletRequest request) {
-        //System.out.println(request.getAttribute("userid"));
+        username = (String) request.getAttribute("userid");
         return userDetailsService.getAllUsers();
     }
 
+
     @ApiOperation(value = "Deleting Any Post", response = String.class)
     @ApiParam(value = "Blog ID is Required", required = true)
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     @DeleteMapping("/deletepost")
     public String deletepost(@RequestParam String id) {
         return blogService.delete(id);
@@ -45,9 +51,16 @@ public class AdminController {
 
     @ApiOperation(value = "Deleting Any Comment", response = String.class)
     @ApiParam(value = "Comment ID is Required", required = true)
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     @DeleteMapping("/deletecomment")
     public String deletecomment(@RequestParam String id) {
         return commentService.delete(id);
     }
 
+
+    @GetMapping("/username")
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
+    public String username(@RequestParam String token){
+        return jwtUtil.extractUsername(token);
+    }
 }

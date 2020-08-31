@@ -4,7 +4,7 @@ public class CommentDTO {
 
     public int id;
     public String commentby;
-    public String Comment;
+    public String comment;
 
     public int getId() {
         return id;
@@ -23,11 +23,11 @@ public class CommentDTO {
     }
 
     public String getComment() {
-        return Comment;
+        return comment;
     }
 
     public void setComment(String comment) {
-        Comment = comment;
+        this.comment = comment;
     }
 
 

@@ -1,5 +1,7 @@
 package com.example.blogapp.service;
 
+import com.example.blogapp.repository.UsersRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Date;
@@ -15,6 +17,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUtil {
     private String secret = "secretkey";
+
+    @Autowired
+    UsersRepo usersRepo;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

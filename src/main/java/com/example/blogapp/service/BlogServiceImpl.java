@@ -29,9 +29,6 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     public PostTagsRepo postTagsRepo;
 
-    public List<BlogPost> getAllEmployees() {
-        return blogPostRepo.findAll();
-    }
 
 
     public Page<BlogPost> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
@@ -144,9 +141,30 @@ public class BlogServiceImpl implements BlogService {
         return blogPostDTOS;
     }
 
-    public List<BlogPost> search(String keyword) {
-        List<BlogPost> list = blogPostRepo.search(keyword);
-        return list;
+    public List<BlogPostDTO> search(String keyword) {
+        List<BlogPostDTO> blogPostDTOS = new LinkedList<>();
+        List<BlogPost> list = blogPostRepo.search(keyword); //modify here
+        list.forEach(blogPost -> {
+            BlogPostDTO blogPostDTO = new BlogPostDTO();
+            blogPostDTO.setId(blogPost.getId());
+            blogPostDTO.setAuthorname(blogPost.getAuthorname());
+            blogPostDTO.setBlogcontent(blogPost.getBlogcontent());
+            blogPostDTO.setEmail(blogPost.getEmail());
+            blogPostDTO.setTitle(blogPost.getTitle());
+            blogPostDTO.setExcerpt(blogPost.getExcerpt());
+            blogPostDTO.setTime(blogPost.getTime());
+            List<CommentDTO> commentDTOS = new ArrayList<>();
+            blogPost.getCommentList().forEach(comment -> {
+                CommentDTO commentDTO = new CommentDTO();
+                commentDTO.setCommentby(comment.getCommentby());
+                commentDTO.setComment(comment.getComment());
+                commentDTO.setId(comment.getId());
+                commentDTOS.add(commentDTO);
+            });
+            blogPostDTO.setComments(commentDTOS);
+            blogPostDTOS.add(blogPostDTO);
+        });
+        return blogPostDTOS;
     }
 
     public List<BlogPostDTO> filter(String name, String content, String excerpt) {
@@ -175,13 +193,36 @@ public class BlogServiceImpl implements BlogService {
         return blogPostDTOS;
     }
 
-    public List<BlogPost> filterAndSearch(String keyword, String name, String content, String excerpt) {
-        return blogPostRepo.filterAndSearch(keyword,name,content,excerpt);
+    public List<BlogPostDTO> filterAndSearch(String keyword, String name, String content, String excerpt) {
+        List<BlogPostDTO> blogPostDTOS = new LinkedList<>();
+        List<BlogPost> list = blogPostRepo.filterAndSearch(keyword,name,content,excerpt);
+        list.forEach(blogPost -> {
+            BlogPostDTO blogPostDTO = new BlogPostDTO();
+            blogPostDTO.setId(blogPost.getId());
+            blogPostDTO.setAuthorname(blogPost.getAuthorname());
+            blogPostDTO.setBlogcontent(blogPost.getBlogcontent());
+            blogPostDTO.setEmail(blogPost.getEmail());
+            blogPostDTO.setTitle(blogPost.getTitle());
+            blogPostDTO.setExcerpt(blogPost.getExcerpt());
+            blogPostDTO.setTime(blogPost.getTime());
+            List<CommentDTO> commentDTOS = new ArrayList<>();
+            blogPost.getCommentList().forEach(comment -> {
+                CommentDTO commentDTO = new CommentDTO();
+                commentDTO.setCommentby(comment.getCommentby());
+                commentDTO.setComment(comment.getComment());
+                commentDTO.setId(comment.getId());
+                commentDTOS.add(commentDTO);
+            });
+            blogPostDTO.setComments(commentDTOS);
+            blogPostDTOS.add(blogPostDTO);
+        });
+        return blogPostDTOS;
     }
 
-    public List<BlogPostDTO> paginated(int page, String sort, String direction, String limit) {
+    public List<BlogPostDTO> paginated(String page, String sort, String direction, String limit) {
         int pageSize = Integer.parseInt(limit);
-        Page<BlogPost> pageObj = findPaginated(page, pageSize, sort, direction);
+        int pageno = Integer.parseInt(page);
+        Page<BlogPost> pageObj = findPaginated(pageno, pageSize, sort, direction);
         List<BlogPost> list = pageObj.getContent();
         List<BlogPostDTO> blogPostDTOS = new LinkedList<>();
         list.forEach(blogPost -> {

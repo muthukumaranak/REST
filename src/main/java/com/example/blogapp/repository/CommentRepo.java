@@ -11,14 +11,14 @@ public interface CommentRepo extends JpaRepository<Comment, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "update comment set comment=?2 where id=?1", nativeQuery = true)
-    void update(int id,String comment);
+    @Query(value = "update comment set comment=?1 where id=?2", nativeQuery = true)
+    String update(String comment,int id);
 
     @Transactional
     @Modifying
-    @Query(value = "delete from comment where id=?1", nativeQuery = true)
-    void delete(int commentId);
+    @Query(value = "delete from comment where id =?1", nativeQuery = true)
+    String delete(int commentId);
 
-    @Query(value = "select email from comment where id=?1",nativeQuery = true)
+    @Query(value = "select commentby from comment where id=?1",nativeQuery = true)
     String findMail(int commentId);
 }

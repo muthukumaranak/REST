@@ -33,9 +33,6 @@ public class BlogappApplication {
 		return new ApiInfoBuilder().title("Spring Boot REST API")
 				.description("Blog Application REST API")
 				.contact(new Contact("Muthukumaran G", "muthukumaran.orgfree.com", "kumaranoc@gmail.com"))
-				.license("Apache 2.0")
-				.licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
-				.version("1.0.0")
 				.build();
 	}
 }

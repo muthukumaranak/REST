@@ -46,7 +46,7 @@ public class CommentService {
     public String update(String id, String comment) {
         try{
             int commentId = Integer.parseInt(id);
-            commentRepo.update(commentId,comment);
+            commentRepo.update(comment,commentId);
             return "Comment Updated";
         }
         catch (Exception e){
@@ -83,7 +83,7 @@ public class CommentService {
         try{
             int commentId = Integer.parseInt(id);
             if(email.equals(commentRepo.findMail(commentId)))
-                commentRepo.update(commentId,comment);
+                commentRepo.update(comment,commentId);
             else
                 return "Not Updated";
             return "Comment Updated";
@@ -96,8 +96,12 @@ public class CommentService {
     public String deletecomment(String id, String email) {
         try{
             int commentId = Integer.parseInt(id);
-            if(email.equals(commentRepo.findMail(commentId)))
-                commentRepo.delete(commentId);
+            String mail = commentRepo.findMail(commentId);
+            System.out.println(email);
+            System.out.println(commentRepo.findMail(commentId));
+            System.out.println(email.equals(mail));
+            if(email.equals(mail))
+                commentRepo.deleteById(commentId);
             else
                 return "Cannot be Deleted";
             return "Deleted";
